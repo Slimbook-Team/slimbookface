@@ -34,12 +34,7 @@ makepkg -i     #importante ejecutar sin sudo, ya que dará error si no se hace a
 
 
 
-
-
-
-
 Ahora dentro de la raiz de /tmp/ se descargará el paquete yaourt y se instalara.
-
 
 
 cd /tmp/
@@ -61,12 +56,13 @@ sudo yaourt -S dpkg    #ejecutar sin sudo
 
 Finalmente instalaremos el último paquete necesario de los pasos previos.
 
+cd /tmp/
 
+git clone https://aur.archlinux.org/python-face_recognition.git
 
+cd python-face_recognition/
 
-
-
-
+makepkg -i
 
 
 
@@ -75,16 +71,20 @@ Instalación de Howdy
 
 Para instalar howdy nos dirigiremos a la carpeta /tmp/ para la descarga del paquete.
 
+cd /tmp/ 
+
+git clone https://aur.archlinux.org/howdy.git
 
 
 
 
-
-Una vez se haya descargado tendremos que modificar una linea del archivo PKGBUILD situado en la raíz de la carpeta de howdy que se ha creado al descargar el paquete en /tmp/.
+Una vez se haya descargado tendremos que modificar una linea del archivo PKGBUILD situado en la raíz
+de la carpeta de howdy que se ha creado al descargar el paquete en /tmp/.
 Ejecutaremos
 
+cd howdy/ 
 
-
+nano PKGBUILD
 
 
 
@@ -96,30 +96,31 @@ Esa linea es la que se tendrá que modificar y se tendrá que dejar así:
 
 python3 setup.py install --no DLIB_USE_CUDA --root="$pkgdir/" --optimize=1 –skip-build
 
-Finalmente guardaremos los cambios del archivo y ya podemos ejecutar el comando para que nos instale howdy en nuestra distribución ArchLinux. Este proceso puede llevar un buen rato.
+Finalmente guardaremos los cambios del archivo y ya podemos ejecutar el comando para que nos instale 
+howdy en nuestra distribución ArchLinux. Este proceso puede llevar un buen rato.
 
-
-
-
-
-
-
-
-
+makepkg -i
 
 
 Una vez ya se haya instalado ejecutaremos el siguiente comando, para poder acceder a la configuración de howdy:
 
+sudo howdy config
 
 
 
 
-IMPORTANTE: Es posible que la primera vez que ejecutemos un comando de howdy nos indique que ejecutemos una serie de comandos por la pantalla de la terminal, si se da el caso habrá que ejecutarlos antes de seguir. Una vez ya se hayan ejecutado con éxito dichos comandos se volverá a ejecutar el anterior nombrado para acceder al archivo de configuración de howdy.
+IMPORTANTE: Es posible que la primera vez que ejecutemos un comando de howdy nos indique que ejecutemos una 
+serie de comandos por la pantalla de la terminal, si se da el caso habrá que ejecutarlos antes de seguir. 
+Una vez ya se hayan ejecutado con éxito dichos comandos se volverá a ejecutar el anterior nombrado para 
+acceder al archivo de configuración de howdy.
 
-Una vez dentro del archivo de configuración nos dirigiremos a la linea del parametro device_path dónde se indicará la ruta y el id del dispositivo de la webcam IR.
+Una vez dentro del archivo de configuración nos dirigiremos a la linea del parametro device_path dónde 
+se indicará la ruta y el id del dispositivo de la webcam IR.
 La ruta donde se encontrará la webcam será: /dev/v4l/by-path/
 
-Para que Howdy autentique a un usuario, se debe agregar un pequeño cambio a cualquier archivo de configuración de PAM en el que Howdy quiera usarlo. La siguiente línea debe agregarse a cualquier archivo de configuración:
+Para que Howdy autentique a un usuario, se debe agregar un pequeño cambio a cualquier archivo de 
+configuración de PAM en el que Howdy quiera usarlo. La siguiente línea debe agregarse a cualquier 
+archivo de configuración:
 
 auth sufficient pam_python.so /lib/security/howdy/pam.py
 
@@ -140,8 +141,8 @@ Instalación de Slimbook Face
 La instalación se realizará mediante el comando dpkg:
 
 
+sudo dpkg -i slimbookface*.deb
 
 
-
-
-Puede ser que aparezcan errores en la instalación al ser un archivo .deb, pero no les haremos caso porque ya se ha instalado anteriormente todo lo necesario para su funcionamiento.
+Puede ser que aparezcan errores en la instalación al ser un archivo .deb, pero no les haremos caso porque 
+ya se ha instalado anteriormente todo lo necesario para su funcionamiento.
