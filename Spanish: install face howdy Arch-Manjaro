@@ -3,25 +3,33 @@ Instalación de Slimbook Face y Howdy en Manjaro/ArchLinux
 
 Pasos previos a la instalación
 
-Antes de comenzar a instalar Slimbook Face o Howdy en nuestra distribución ArchLinux será necesario instalar algunas herramientas/aplicaciones previamente.
+Antes de comenzar a instalar Slimbook Face o Howdy en nuestra distribución ArchLinux será necesario instalar 
+algunas herramientas/aplicaciones previamente.
 
 Nos aseguraremos de que el sistema este actualizado a su última versión:
 
-
+sudo pacman -Syyu
 
 
 
 Instalaremos las los paquetes indicados, si no lo están.
 
 
+sudo pacman -S -needed base-devel git wget yajl
 
 
 
+A continuación nos dirigiremos a la ruta de archivos temporales y descargaremos el paquete 
+package-query y lo instalaremos:
 
-A continuación nos dirigiremos a la ruta de archivos temporales y descargaremos el paquete package-query y lo instalaremos:
 
+cd /tmp/
 
+git clone https://aur.archlinux.org/package-query.git
 
+cd package-query/
+
+makepkg -i     #importante ejecutar sin sudo, ya que dará error si no se hace así
 
 
 
@@ -34,14 +42,21 @@ Ahora dentro de la raiz de /tmp/ se descargará el paquete yaourt y se instalara
 
 
 
+cd /tmp/
+
+git clone https://aur.archlinux.org/yaourt.git
+
+cd yaourt/
+
+makepkg -i
 
 
 
 
+Instalaremos el de dpkg mediante el comando yaourt para poder instalar el paquete .deb 
+de Slimbook Face más adelante.
 
-
-Instalaremos el de dpkg mediante el comando yaourt para poder instalar el paquete .deb de Slimbook Face más adelante.
-
+sudo yaourt -S dpkg    #ejecutar sin sudo
 
 
 Finalmente instalaremos el último paquete necesario de los pasos previos.
