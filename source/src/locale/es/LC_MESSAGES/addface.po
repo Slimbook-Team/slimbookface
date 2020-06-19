@@ -1,0 +1,66 @@
+# SLIMBOOK FACE
+# Copyright (C) 2019
+# This file is distributed under the same license as the SLIMBOOK FACE package.
+# SLIMBOOK <dev@slimbook.es>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: SLIMBOOK FACE 1.0beta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-09 14:08+0200\n"
+"PO-Revision-Date: 2019-05-09 17:59+0200\n"
+"Last-Translator: SLIMBOOK <dev@slimbook.es>\n"
+"Language-Team: Spanish <LL@li.org>\n"
+"Language: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: addface.py:28
+msgid "straddfacetitle"
+msgstr "Slimbook Face: Añadir un nuevo rostro"
+
+#: addface.py:44
+msgid "strsteps1"
+msgstr "Sigue los pasos para añadir un nuevo rostro a Slimbook Face:"
+
+#: addface.py:44
+msgid "strsteps2"
+msgstr "Paso 1:"
+
+#: addface.py:44
+msgid "strsteps3"
+msgstr "Introduce un nombre"
+
+#: addface.py:44
+msgid "strsteps4"
+msgstr "Paso 2:"
+
+#: addface.py:44
+msgid "strsteps5"
+msgstr "Toma una foto para ver cómo te ves"
+
+#: addface.py:44
+msgid "strsteps6"
+msgstr "Paso 3:"
+
+#: addface.py:44
+msgid "strsteps7"
+msgstr "Acepta para empezar a capturar tú rostro (esto\npuede llevar 5-10 segundos)"
+
+#: addface.py:48
+msgid "strfacemodelname"
+msgstr "Nombre del rostro:"
+
+#: addface.py:59
+msgid "strbuttonwebcam"
+msgstr "Previsualizar webcam"
+
+#: addface.py:87
+msgid "stralertaddface"
+msgstr "El rostro se ha añadido correctamente"
+
+#: addface.py:89
+msgid "stralertaddface2"
+msgstr "Error al añadir el rostro, asegurese de que solo aparezca un rostro a la vez e intentelo de nuevo."

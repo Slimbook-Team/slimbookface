@@ -1,0 +1,247 @@
+# SLIMBOOK FACE
+# Copyright (C) 2019
+# This file is distributed under the same license as the SLIMBOOK FACE package.
+# SLIMBOOK <dev@slimbook.es>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: SLIMBOOK FACE 1.0beta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-09 14:08+0200\n"
+"PO-Revision-Date: 2019-05-09 17:59+0200\n"
+"Last-Translator: SLIMBOOK <dev@slimbook.es>\n"
+"Language-Team: Spanish <LL@li.org>\n"
+"Language: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: slimbookface.py:35
+msgid "strconfigfilecheck"
+msgstr "Ya existe slimbookface.conf"
+
+#: slimbookface.py:60
+msgid "strmainpage"
+msgstr "Menú principal"
+
+#: slimbookface.py:63
+msgid "strinfopage"
+msgstr "Información"
+
+#: slimbookface.py:67
+msgid "strmaindesc1"
+msgstr "Bienvenido a Slimbook Face!"
+
+#: slimbookface.py:74
+msgid "strmaindesc2"
+msgstr "Gracias por utilizar SLIMBOOK FACE para el reconocimiento facial / biométrico."
+
+#: slimbookface.py:74
+msgid "strmaindesc3"
+msgstr "Para configurar la aplicación añade un rostro. Si tienes problemas en inicio de sesión"
+
+#: slimbookface.py:74
+msgid "strmaindesc4"
+msgstr "puedes deshabilitarlo para el inicio de sesión, pero se mantendrá para sudo o instalar\naplicaciones."
+
+#: slimbookface.py:74
+msgid "strmaindesc5"
+msgstr "El reconocimiento facial o biométrico puede dar falsos negativos (no reconocerte)"
+
+#: slimbookface.py:74
+msgid "strmaindesc6"
+msgstr "si hay mucha luz detrás de ti, si inclinas la cabeza y no la dejas recta, si cambias tu look"
+
+#: slimbookface.py:74
+msgid "strmaindesc7"
+msgstr "o cubres parte de tú cara. Siendo así también, como parte de la seguridad."
+
+#: slimbookface.py:74
+msgid "strmaindesc8"
+msgstr " "
+
+#: slimbookface.py:81
+msgid "strstep1"
+msgstr "Paso 1:"
+
+#: slimbookface.py:87
+msgid "strbuttoninstallircam"
+msgstr "Instalar el driver para la webcam IR"
+
+#: slimbookface.py:92
+msgid "strtooltipinstallircam"
+msgstr "Ya tienes instalado el driver de la cam"
+
+#: slimbookface.py:102
+msgid "strstep2"
+msgstr "Paso 2:"
+
+#: slimbookface.py:109 slimbookface.py:267 slimbookface.py:272
+#: slimbookface.py:275
+msgid "strenablefacerecognition"
+msgstr "Habilitar el reconocimiento facial para autenticar"
+
+#: slimbookface.py:111 slimbookface.py:269 slimbookface.py:278
+msgid "strdisablefacerecognition"
+msgstr "Deshabilitar el reconocimiento facial para autenticar"
+
+#: slimbookface.py:117 slimbookface.py:136
+msgid "strtooltipofacerecognitionauth"
+msgstr "Necesitas instalar el driver de la cam para usar esta opción"
+
+#: slimbookface.py:127
+msgid "strestep3"
+msgstr "Paso 3:"
+
+#: slimbookface.py:133
+msgid "straddnewfacemodel"
+msgstr "Añadir un nuevo rostro para un usuario"
+
+#: slimbookface.py:133
+msgid "strdisablewithlogin"
+msgstr "Deshabilitar reconocimiento facial en el login"
+
+#: slimbookface.py:133
+msgid "strenablewithlogin"
+msgstr "Habilitar reconocimiento facial en el login"
+
+#: slimbookface.py:148
+msgid "strmaindesc9"
+msgstr "Esta aplicación está en versión beta."
+
+#: slimbookface.py:163
+msgid "strautostarttxt"
+msgstr "Autoarrancar app de configuración con el sistema"
+
+#: slimbookface.py:183
+msgid "strvisitwebsite"
+msgstr "Visita la web de SLIMBOOK"
+
+#: slimbookface.py:187
+msgid "strlabelusermanual"
+msgstr "Manual de usuario de Slimbook Face"
+
+#: slimbookface.py:187
+msgid "strusermanual"
+msgstr "https://slimbook.es/tutoriales/aplicaciones-slimbook/399-slimbook-face-reconocimiento-facial-y-olvidate-de-contrasenas"
+
+#: slimbookface.py:192
+msgid "strsocialnetworks1"
+msgstr "Si la aplicación te ha sido de utilidad, considera decirlo"
+
+#: slimbookface.py:192
+msgid "strsocialnetworks2"
+msgstr "en nuestras redes sociales o incluso comprar un SLIMBOOK ;)"
+
+#: slimbookface.py:242
+msgid "strthanks1"
+msgstr "Gracias a boltgolt. El software se proporciona \"tal cual\", sin"
+
+#: slimbookface.py:242
+msgid "strthanks2"
+msgstr "garantía de ningún tipo."
+
+#: slimbookface.py:247
+msgid "strinfo1"
+msgstr "Información:"
+
+#: slimbookface.py:247
+msgid "strinfo2"
+msgstr "Contacta con nosotros si encuentras algún error."
+
+#: slimbookface.py:258
+msgid "strsendemail"
+msgstr "Envía un e-mail a: dev@slimbook.es"
+
+#: slimbookface.py:264
+msgid "strcopyemail"
+msgstr "Copiar e-mail"
+
+#: slimbookface.py:272
+msgid "strlicense1"
+msgstr "Usted es libre de:"
+
+#: slimbookface.py:272
+msgid "strlicense2"
+msgstr "Compartir:"
+
+#: slimbookface.py:272
+msgid "strlicense3"
+msgstr "--copiar y redistribuir el material en cualquier medio"
+
+#: slimbookface.py:272
+msgid "strlicense4"
+msgstr "o formato"
+
+#: slimbookface.py:272
+msgid "strlicense5"
+msgstr "Slimbook Copyright - License Creative Commons BY-NC-ND 4.0"
+
+#: slimbookface.py:317
+msgid "strterminaltitle"
+msgstr "Instalando el driver de la webcam IR"
+
+#: slimbookface.py:319
+msgid "strterminalfollowsteps"
+msgstr "Sigue los pasos para instalar el driver de la webcam IR en tú sistema."
+
+#: slimbookface.py:319
+msgid "strterminalfollowsteps2"
+msgstr "IMPORTANTE: Cuando el programa esté buscando la cámara IR, sólamente deberás escribir YES cuando veas una luz roja parpadenando."
+
+#: slimbookface.py:319
+msgid "strterminalfollowsteps3"
+msgstr "Presiona cualquier tecla para continuar..."
+
+#: slimbookface.py:324
+msgid "strterminalcompleted"
+msgstr "Se ha completado! Puedes cerrar está terminal"
+
+#: slimbookface.py:361
+msgid "stremailcopiednotify"
+msgstr "El e-mail ha sido copiado al portapapeles"
+
+#: slimbookface.py:83
+msgid "facemodelname"
+msgstr "Nombre del rostro"
+
+#: slimbookface.py:83
+msgid "createddateface"
+msgstr "Fecha de creación"
+
+#: slimbookface.py:129
+msgid "drivercaminstall"
+msgstr "Instalar driver de la webcam"
+
+#: slimbookface.py:141
+msgid "enablefacerecognition"
+msgstr "Habilitar reconocimiento facial"
+
+#: slimbookface.py:143
+msgid "disablefacerecognition"
+msgstr "Deshabilitar reconocimiento facial"
+
+#: slimbookface.py:173
+msgid "facemodelsadded"
+msgstr "Rostros añadidos"
+
+#: slimbookface.py:178
+msgid "facemodelsempty"
+msgstr "0 rostros añadidos"
+
+#: slimbookface.py:202
+msgid "removefaceselected"
+msgstr "Eliminar rostro seleccionado"
+
+#: slimbookface.py:202
+msgid "dialogwarning1"
+msgstr "Alerta!"
+
+#: slimbookface.py:202
+msgid "dialogwarning2"
+msgstr "Estás seguro que deseas eliminar el rostro"
+
+#: slimbookface.py:202
+msgid "dialogwarning3"
+msgstr "?"

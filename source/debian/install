@@ -1,0 +1,12 @@
+slimbookface /usr/bin/
+src/slimbookface /usr/share/slimbookface/
+src/addface.py /usr/share/slimbookface/
+src/slimbookface.conf /usr/share/slimbookface/
+src/slimbookface-howdy.py /usr/share/slimbookface/
+src/locale/es/LC_MESSAGES/*.mo /usr/share/slimbookface/locale/es/LC_MESSAGES/
+src/locale/en/LC_MESSAGES/*.mo /usr/share/slimbookface/locale/en/LC_MESSAGES/
+slimbookface.desktop /usr/share/applications/
+images/*.png /usr/share/slimbookface/images/
+slimbookface.png /usr/share/pixmaps/
+slimbookface-autostart.desktop /usr/share/slimbookface/
+src/bin/*.sh /usr/share/slimbookface/bin/

@@ -1,0 +1,19 @@
+slimbookface (1.2beta) bionic; urgency=medium
+
+  * You can disable or enable face recognition in login screen!
+
+ -- slimbook <sat@slimbook.es>  Wed, 30 Sep 2019 18:08:02 +0200
+
+slimbookface (1.1beta) bionic; urgency=medium
+
+  * You can delete and control the faces added!
+  * Some bugs solved!
+
+ -- slimbook <sat@slimbook.es>  Wed, 02 Aug 2019 15:05:02 +0200
+
+slimbookface (1.0beta) bionic; urgency=medium
+
+  * Slimbook Face has been released!
+  * Facial and biometric recognition and forget passwords!
+
+ -- slimbook <sat@slimbook.es>  Fri, 10 May 2019 13:16:02 +0200
