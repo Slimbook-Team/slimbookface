@@ -4,4 +4,8 @@ Slimbook Face is an application that allows you to graphically manage multiple f
 
 ![alt text](https://slimbook.es/github/slimbookface/screenshot.png "Screenshot GUI")
 
-This software is protected with the GPLv3 license, which allows you to modify it, or distribute it with the same license and authorship. Thank you.
+--
+
+This software is protected with the GPLv3 license, which allows you to modify it with the same license and authorship. 
+
+Thank you.
