@@ -1,0 +1,12 @@
+#!/bin/sh
+# prerm script for slimbookamdcontroller
+#
+# see: dh_installdeb(1)
+
+set -e
+
+#disable howdy
+pkexec slimbookface-howdy-pkexec disable none
+
+
+exit 0

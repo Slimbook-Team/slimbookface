@@ -1,585 +1,249 @@
-#!/usr/bin/python3
-# -*- coding: utf-8 -*-
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2021-06-15 13:38+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
 
-import gi
-import os
-import sys
-import subprocess
-import signal
-import json
-import time
-import configparser
-import gettext, locale
-import getpass
-from datetime import datetime
-from os.path import expanduser
 
-gi.require_version('Gtk', '3.0')
-gi.require_version('Gdk', '3.0')
-from gi.repository import GObject, Gdk, Gtk, GLib, GdkPixbuf
+#: slimbookface.py:111
+msgid "strmainpage"
+msgstr ""
 
-userpath = expanduser("~")
+#: slimbookface.py:112
+msgid "strinfopage"
+msgstr ""
 
-user = getpass.getuser()
+#: slimbookface.py:225
+msgid "str_faces"
+msgstr ""
 
-entorno_usu = locale.getlocale()[0]
-if entorno_usu.find("en") >= 0 or entorno_usu.find("es") >= 0:
-	idiomas = [entorno_usu]
-else:
-	idiomas = ['en']
+#: slimbookface.py:233
+msgid "facemodelsempty"
+msgstr ""
 
-print('Language: ', entorno_usu)
+#: slimbookface.py:245
+msgid "removefaceselected"
+msgstr ""
 
-t = gettext.translation('slimbookface',
-						'/usr/share/slimbookface/locale',
-						languages=idiomas,
-						fallback=True,)
+#: slimbookface.py:267
+msgid "str_devices"
+msgstr ""
 
-_ = t.gettext
-		
-class SlimbookFace(Gtk.Window):
+#: slimbookface.py:275
+msgid "str_recognition"
+msgstr ""
 
-	def __init__(self):
-		Gtk.Window.__init__(self, title='Slimbook Face')
-		self.set_resizable(False)
-		self.set_default_size(200, 360)
-		self.set_position(Gtk.WindowPosition.CENTER)
-		self.set_icon_from_file('/usr/share/slimbookface/images/icono.png')
-		vbox = Gtk.VBox(spacing=5)
-		vbox.set_border_width(5)
-		self.add(vbox)
+#: slimbookface.py:279
+msgid "Fast"
+msgstr ""
 
-		notebook = Gtk.Notebook.new()
-		vbox.pack_start(notebook, False, False, 1)
-		
-		facesList = []
+#: slimbookface.py:285
+msgid "Balanced"
+msgstr ""
 
-		models_path = '/lib/security/howdy/models/'+ user +'.dat'
-		try:
-			encodings = json.load(open(models_path))
-		except FileNotFoundError:
-			print("No face model known for the user " + user)
-			encodings = ""
+#: slimbookface.py:291
+msgid "Secure"
+msgstr ""
 
-		if encodings == "":
-			print("0 faces added")
-		else:
-			for enc in encodings:
-				strface = enc["label"]
-				date = time.strftime('%d-%m-%Y %H:%M:%S', time.localtime(enc["time"]))
-				idface = enc["id"]
+#: slimbookface.py:360
+msgid "strvisitwebsite"
+msgstr ""
 
-				listfor = (int(idface), str(strface), str(date))
+#: slimbookface.py:363 slimbookface.py:367
+msgid "strlabelusermanual"
+msgstr ""
 
-				facesList.append(listfor)
+#: slimbookface.py:363 slimbookface.py:367
+msgid "strusermanual"
+msgstr ""
 
-			self.listStoreFaces = Gtk.ListStore(int, str, str)
+#: slimbookface.py:371
+msgid "strsocialnetworks1"
+msgstr ""
 
-			for face in facesList:
-				self.listStoreFaces.append(list(face))
+#: slimbookface.py:371
+msgid "strsocialnetworks2"
+msgstr ""
 
-			#TreView que almacena el listado de los rostros añadidos por el usuario
-			self.facesTreeView = Gtk.TreeView(self.listStoreFaces)
-			
-			for i, column_title in enumerate(["ID", (_("facemodelname")), (_("createddateface"))]):
-				rendererText = Gtk.CellRendererText()
-				column_text = Gtk.TreeViewColumn(column_title, rendererText, text=i)
-				self.facesTreeView.append_column(column_text)
-		
-		#Tabla del menú principal
-		table = Gtk.Table(2, 2, False)
-		notebook.append_page(table, Gtk.Label.new(_('strmainpage')))
+#: slimbookface.py:376
+msgid "strthanks1"
+msgstr ""
 
-		#Tabla del menú información
-		table2 = Gtk.Table(2, 2, False)
-		notebook.append_page(table2, Gtk.Label.new(_('strinfopage')))
-		#MAIN
-		# (0, 0)		
-		pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-			filename='/usr/share/slimbookface/images/icono.png',
-			width=64,
-			height=64,
-			preserve_aspect_ratio=True)
-		iconApp = Gtk.Image.new_from_pixbuf(pixbuf)
-		iconApp.set_alignment(0.5, 0)
-		table.attach(iconApp, 0, 2, 0, 1,
-			xpadding=5,
-			ypadding=5,
-			xoptions=Gtk.AttachOptions.SHRINK,
-			yoptions=Gtk.AttachOptions.SHRINK)
-		# (1, 0)
-		label = Gtk.Label('')
-		label.set_markup('<big><b>' +(_('strmaindesc1'))+ '</b></big>')
-		label.set_alignment(0.5, 0.5)
-		table.attach(label, 0, 2, 1, 2, xpadding=5, ypadding=5)
-		# (2, 0)
-		label = Gtk.Label('')
-		label.set_markup((_('strmaindesc2')) +'\n\n'+ (_('strmaindesc3')) +'\n'+ (_('strmaindesc4'))+ '\n\n'+ (_('strmaindesc5')) +'\n'+ (_('strmaindesc6')) +'\n'+ (_('strmaindesc7')) +'\n'+ (_('strmaindesc8')) +'\n')
-		label.set_alignment(0, 0.5)
-		table.attach(label, 0, 2, 2, 3,
-			xpadding=25,
-			ypadding=5)
-		# (3, 0)
-		'''hbox = Gtk.HBox(spacing=5)
-		table.attach(hbox, 0, 2, 3, 4,
-			xpadding=5,
-			ypadding=5,
-			xoptions=Gtk.AttachOptions.SHRINK,
-			yoptions=Gtk.AttachOptions.SHRINK)'''
+#: slimbookface.py:376
+msgid "strthanks2"
+msgstr ""
 
-		self.buttonInstallDriver = Gtk.Button(label=(_('drivercaminstall')))
-		if str(subprocess.getoutput('which howdy')) == '':
-			self.buttonInstallDriver.set_sensitive(True)
-		else:
-			self.buttonInstallDriver.set_sensitive(False)
-			self.buttonInstallDriver.set_tooltip_text(_('strtooltipinstallircam'))
-		self.buttonInstallDriver.set_alignment(0.5, 0)
-		self.buttonInstallDriver.connect("clicked", self.on_buttonInstallDriver_clicked)
-		self.buttonInstallDriver.set_property("width-request", 400)
-		table.attach(self.buttonInstallDriver, 0, 2, 3, 4,
-			xpadding=5,
-			ypadding=5,
-			xoptions=Gtk.AttachOptions.SHRINK,
-			yoptions=Gtk.AttachOptions.SHRINK)
-		#hbox.pack_start(self.buttonInstallDriver, False, False, 0)
+#: slimbookface.py:380
+msgid "strinfo1"
+msgstr ""
 
-		# (4, 0)
-		if os.path.isfile('/lib/security/howdy/config.ini'):
-			if os.system('cat /lib/security/howdy/config.ini | grep disabled | grep true') == 0:
-				self.buttonOnOff = Gtk.Button(label=(_('enablefacerecognition')))
-			elif os.system('cat /lib/security/howdy/config.ini | grep disabled | grep false') == 0:
-				self.buttonOnOff = Gtk.Button(label=(_('disablefacerecognition')))
-		else:
-			self.buttonOnOff = Gtk.Button(label=(_('enablefacerecognition')))
-		self.buttonOnOff.connect("clicked", self.on_buttonOnOff_clicked)
-		if str(subprocess.getoutput('which howdy')) == '':
-			self.buttonOnOff.set_sensitive(False)
-			self.buttonOnOff.set_tooltip_text(_('strtooltipofacerecognitionauth'))
-		else:
-			self.buttonOnOff.set_sensitive(True)
-		self.buttonOnOff.set_property("width-request", 400)
-		table.attach(self.buttonOnOff, 0, 2, 4, 5,
-			xpadding=5,
-			ypadding=5,
-			xoptions=Gtk.AttachOptions.SHRINK,
-			yoptions=Gtk.AttachOptions.SHRINK)
-		#hbox.pack_start(self.buttonOnOff, False, False, 0)
+#: slimbookface.py:380
+msgid "strinfo2"
+msgstr ""
 
-		# (5, 0)
-		if os.path.isfile('/lib/security/howdy/config.ini'):
-			if os.system('cat /etc/pam.d/common-auth | grep howdy | grep "#"') == 0:
-				self.buttonEnableLogin = Gtk.Button(label=(_('strenablewithlogin')))
-			else:
-				self.buttonEnableLogin = Gtk.Button(label=(_('strdisablewithlogin')))
-		else:
-			self.buttonEnableLogin = Gtk.Button(label=(_('strdisablewithlogin')))
-		self.buttonEnableLogin.connect("clicked", self.on_buttonEnableLogin_clicked)
-		if str(subprocess.getoutput('which howdy')) == '':
-			self.buttonEnableLogin.set_sensitive(False)
-			self.buttonEnableLogin.set_tooltip_text(_('strtooltipofacerecognitionauth'))
-		else:
-			self.buttonEnableLogin.set_sensitive(True)
-		self.buttonEnableLogin.set_property("width-request", 400)
-		table.attach(self.buttonEnableLogin, 0, 2, 5, 6,
-			xpadding=5,
-			ypadding=5,
-			xoptions=Gtk.AttachOptions.SHRINK,
-			yoptions=Gtk.AttachOptions.SHRINK)
+#: slimbookface.py:387
+msgid "strsendemail"
+msgstr ""
 
-		# (6, 0)
-		'''hbox = Gtk.HBox(spacing=5)
-		table.attach(hbox, 0, 2, 4, 5,
-			xpadding=5,
-			ypadding=5,
-			xoptions=Gtk.AttachOptions.SHRINK,
-			yoptions=Gtk.AttachOptions.SHRINK)'''
-		self.buttonAddFace = Gtk.Button(label=(_('straddnewfacemodel')))
-		if str(subprocess.getoutput('which howdy')) == '':
-			self.buttonAddFace.set_sensitive(False)
-			self.buttonAddFace.set_tooltip_text(_('strtooltipofacerecognitionauth'))
-		else:
-			self.buttonAddFace.set_sensitive(True)
-		self.buttonAddFace.set_alignment(0.5, 0)
-		self.buttonAddFace.connect("clicked", self.on_buttonAddFace)
-		self.buttonAddFace.set_property("width-request", 400)
-		table.attach(self.buttonAddFace, 0, 2, 6, 7,
-			xpadding=5,
-			ypadding=5,
-			xoptions=Gtk.AttachOptions.SHRINK,
-			yoptions=Gtk.AttachOptions.SHRINK)
-		#hbox.pack_start(self.buttonAddFace, False, False, 0)
+#: slimbookface.py:394
+msgid "strcopyemail"
+msgstr ""
 
-		# (7, 0)
-		table.attach(Gtk.Label(' '), 0, 2, 7, 8, xpadding=5, ypadding=5)
-		# (8, 0)
-		label = Gtk.Label('')
-		label.set_markup('<b>'+ (_('facemodelsadded')) +'</b>')
-		label.set_alignment(0.5, 0.5)
-		table.attach(label, 0, 2, 8, 9, xpadding=5, ypadding=5)
-		# (9, 0)
-		if encodings == "":
-			table.attach(Gtk.Label(_('facemodelsempty')), 0, 2, 9, 10, xpadding=5, ypadding=5)
-		else:
-			facesVbox = Gtk.VBox(spacing=5)
-			
-			scrolled_window1 = Gtk.ScrolledWindow()
-			scrolled_window1.set_border_width(10)
-			scrolled_window1.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
-			scrolled_window1.set_min_content_height(100)
-			scrolled_window1.set_min_content_width(500)
-			scrolled_window1.add_with_viewport(facesVbox)
-			
-			facesVbox.pack_start(self.facesTreeView, False, False, 1)
-			table.attach(scrolled_window1, 0, 2, 9, 10,
-				xpadding=5,
-				ypadding=10,
-				xoptions=Gtk.AttachOptions.SHRINK,
-				yoptions=Gtk.AttachOptions.SHRINK)
-			# (10, 0)
-			hbox = Gtk.HBox(spacing=5)
-			table.attach(hbox, 0, 2, 10, 11,
-				xpadding=5,
-				ypadding=5,
-				xoptions=Gtk.AttachOptions.SHRINK,
-				yoptions=Gtk.AttachOptions.SHRINK)
-			self.buttonDeleteFace = Gtk.Button(label=(_('removefaceselected')))
-			self.buttonDeleteFace.set_sensitive(False)
-			self.buttonDeleteFace.set_property("width-request", 200)
-			self.buttonDeleteFace.connect("clicked", self.on_faceDelBtn_clicked, self.facesTreeView.get_selection(), self.facesTreeView)
-			hbox.pack_start(self.buttonDeleteFace, False, False, 1)
+#: slimbookface.py:405
+msgid "strlicense1"
+msgstr ""
 
-			self.tree_selection = self.facesTreeView.get_selection()
-			self.tree_selection.connect("changed", self.onSelectionChanged, self.buttonDeleteFace)
-		
-		# (11, 0)
-		self.checkAutostart = Gtk.CheckButton(_('strautostarttxt'))
-		self.checkAutostart.set_alignment(0, 0.5)
-		self.checkAutostart.set_active(self.autostart_checkAutostart(self.checkAutostart))
-		self.checkAutostart.connect("toggled", self.on_checkAutostart_toggled)
-		vbox.pack_end(self.checkAutostart, False, False, 1)
+#: slimbookface.py:405
+msgid "strlicense2"
+msgstr ""
 
-		#INFORMATION
-		# (0, 0)
-		pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-			filename='/usr/share/slimbookface/images/logo.png',
-			width=300,
-			height=500,
-			preserve_aspect_ratio=True)
-		SlimbookIcon = Gtk.Image.new_from_pixbuf(pixbuf)
-		SlimbookIcon.set_alignment(0.5, 0)
-		table2.attach(SlimbookIcon, 0, 2, 0, 1, xpadding=5, ypadding=5)
-		# (1, 0)
-		label = Gtk.LinkButton('https://slimbook.es/', label=(_('strvisitwebsite')))
-		label.set_alignment(0.5, 0)
-		table2.attach(label, 0, 1, 1, 2, xpadding=5, ypadding=5)
-		# (2, 0)
-		label = Gtk.LinkButton((_('strusermanual')), label=(_('strlabelusermanual')))
-		label.set_alignment(0.5, 0)
-		table2.attach(label, 0, 1, 2, 3, xpadding=5, ypadding=5)
-		# (3, 0)
-		label = Gtk.Label('')
-		label.set_markup((_('strsocialnetworks1')) +'\n' +(_('strsocialnetworks2')))
-		label.set_justify(Gtk.Justification.CENTER)
-		table2.attach(label, 0, 1, 3, 4, xpadding=5, ypadding=5)
-		# (4, 0)
-		hbox = Gtk.HBox(spacing=5)
-		table2.attach(hbox, 0, 1, 4, 5,
-			xpadding=5,
-			ypadding=5,
-			xoptions=Gtk.AttachOptions.SHRINK,
-			yoptions=Gtk.AttachOptions.SHRINK)
-		pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-			filename='/usr/share/slimbookface/images/twitter.png',
-			width=25,
-			height=25,
-			preserve_aspect_ratio=True)
-		twitter = Gtk.Image.new_from_pixbuf(pixbuf)
-		twitter.set_alignment(0.5, 0)
-		hbox.pack_start(twitter, False, False, 0)
-		label = Gtk.Label(' ')
-		label.set_markup("<span><b><a href='https://twitter.com/SlimbookEs'>@SlimbookEs</a></b>	</span>")
-		label.set_justify(Gtk.Justification.CENTER)
-		hbox.pack_start(label, False, False, 0)
+#: slimbookface.py:405
+msgid "strlicense3"
+msgstr ""
 
-		pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-			filename='/usr/share/slimbookface/images/facebook.png',
-			width=25,
-			height=25,
-			preserve_aspect_ratio=True)
-		facebook = Gtk.Image.new_from_pixbuf(pixbuf)
-		facebook.set_alignment(0.5, 0)
-		hbox.pack_start(facebook, False, False, 0)
-		label = Gtk.Label(' ')
-		label.set_markup("<span><b><a href='https://www.facebook.com/slimbook.es'>Slimbook</a></b>	</span>")
-		label.set_justify(Gtk.Justification.CENTER)
-		hbox.pack_start(label, False, False, 0)
+#: slimbookface.py:405
+msgid "strlicense4"
+msgstr ""
 
-		pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-			filename='/usr/share/slimbookface/images/mastodon.png',
-			width=25,
-			height=25,
-			preserve_aspect_ratio=True)
-		mastodon = Gtk.Image.new_from_pixbuf(pixbuf)
-		mastodon.set_alignment(0.5, 0)
-		hbox.pack_start(mastodon, False, False, 0)
-		label = Gtk.Label(' ')
-		label.set_markup("<span><b><a href='https://mastodon.social/@slimbook'>@Slimbook</a></b></span>")
-		label.set_justify(Gtk.Justification.CENTER)
-		hbox.pack_start(label, False, False, 0)
-		# (5, 0)
-		label = Gtk.Label('')
-		label.set_markup((_("strthanks1")) +'\n'+ (_("strthanks2")))
-		label.set_justify(Gtk.Justification.CENTER)
-		table2.attach(label, 0, 1, 5, 6, xpadding=5, ypadding=5)
-		# (6, 0)
-		label = Gtk.Label('')
-		label.set_markup("\n<span><b>"+ (_("strinfo1")) +" </b>"+ (_("strinfo2")) +"</span>")
-		label.set_justify(Gtk.Justification.CENTER)
-		table2.attach(label, 0, 1, 6, 7, xpadding=5, ypadding=5)
-		# (7, 0)
-		hbox = Gtk.HBox(spacing=5)
-		table2.attach(hbox, 0, 1, 7, 8,
-			xpadding=5,
-			ypadding=5,
-			xoptions=Gtk.AttachOptions.SHRINK,
-			yoptions=Gtk.AttachOptions.SHRINK)
-		label = Gtk.Label(' ')
-		label.set_markup("<span><b>"+ (_("strsendemail"))+ "</b></span>")
-		label.set_justify(Gtk.Justification.CENTER)
-		hbox.pack_start(label, False, False, 0)
-		icon = Gtk.Image()
-		icon_path = '/usr/share/slimbookface/images/copy.png'
-		icon.set_from_file(icon_path)
-		icon.set_tooltip_text(_('strcopyemail'))
-		buttonCopyEmail = Gtk.Button()
-		buttonCopyEmail.add(icon)
-		buttonCopyEmail.connect("clicked", self.on_buttonCopyEmail_clicked)
-		buttonCopyEmail.set_alignment(0.5, 0)
-		hbox.pack_start(buttonCopyEmail, False, False, 0)
-		# (8, 0)
-		label = Gtk.Label('')
-		label.set_markup('<b>'+ (_('strlicense1')) +'</b>\n<span size="smaller"><b>'+ (_('strlicense2')) +'</b> '+ (_('strlicense3')) +' '+ (_('strlicense4'))+ '\n'+ (_('strlicense5')) +'</span>')
-		label.set_justify(Gtk.Justification.CENTER)
-		table2.attach(label, 0, 2, 8, 9, xpadding=5, ypadding=5)
-		# (9, 0)
-		pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-			filename='/usr/share/slimbookface/images/cc.png',
-			width=100,
-			height=200,
-			preserve_aspect_ratio=True)
-		CCIcon = Gtk.Image.new_from_pixbuf(pixbuf)
-		CCIcon.set_alignment(0.5, 0)
-		table2.attach(CCIcon, 0, 2, 9, 10, xpadding=5, ypadding=5)
-	
-	def autostart_checkAutostart(self, checkAutostart):
-		if (os.path.isfile(userpath + '/.config/autostart/slimbookface-autostart.desktop')):
-			return True
-		else:
-			return False
+#: slimbookface.py:405
+msgid "strlicense5"
+msgstr ""
 
-	def on_checkAutostart_toggled(self, checkAutostart):
-		if checkAutostart.get_active() == True:
-			if not (os.path.isdir(userpath + '/.config/autostart')):
-				os.system('mkdir '+ userpath +'/.config/autostart')
-			os.system('cp /usr/share/slimbookface/slimbookface-autostart.desktop ' + userpath + '/.config/autostart/slimbookface-autostart.desktop')
-		else:
-			os.system('rm ' + userpath + '/.config/autostart/slimbookface-autostart.desktop')
+#: slimbookface.py:523 slimbookface.py:752 slimbookface.py:954
+msgid "dialogwarning1"
+msgstr ""
 
-	def on_buttonOnOff_clicked(self, buttonOnOff):
-		if os.path.isfile('/lib/security/howdy/config.ini'):
-			if os.system('cat /lib/security/howdy/config.ini | grep disabled | grep true') == 0:
-				if os.system('pkexec python3 /usr/share/slimbookface/slimbookface-howdy.py enable ""') == 0:
-					buttonOnOff.set_label(_('disablefacerecognition'))
-				else:
-					buttonOnOff.set_label(_('enablefacerecognition'))
-			else:
-				if os.system('pkexec python3 /usr/share/slimbookface/slimbookface-howdy.py disable ""') == 0:
-					buttonOnOff.set_label(_('enablefacerecognition'))
-				else:
-					buttonOnOff.set_label(_('disablefacerecognition'))
+#: slimbookface.py:525
+msgid "str_reinstallWarn"
+msgstr ""
 
-	def on_buttonEnableLogin_clicked(self, buttonEnableLogin):
-		if os.path.isfile('/lib/security/howdy/config.ini'):
-			if os.system('cat /etc/pam.d/common-auth | grep howdy | grep "#"') == 0:
-				if os.system('pkexec sh /usr/share/slimbookface/bin/disable_login.sh enable') == 0:
-					buttonEnableLogin.set_label(_('strdisablewithlogin'))
-				else:
-					buttonEnableLogin.set_label(_('strenablewithlogin'))
-			else:
-				if os.system('pkexec sh /usr/share/slimbookface/bin/disable_login.sh disable') == 0:
-					buttonEnableLogin.set_label(_('strenablewithlogin'))
-				else:
-					buttonEnableLogin.set_label(_('strdisablewithlogin'))
+#: slimbookface.py:546
+msgid "strterminalfollowsteps"
+msgstr ""
 
-	def on_buttonInstallDriver_clicked(self, buttonInstallDriver):
+#: slimbookface.py:548
+msgid "strterminalfollowsteps2"
+msgstr ""
 
-		subprocess.Popen(
-			["x-terminal-emulator --new-tab --hold -e $SHELL -c '"+
-			"echo \033[34m---SLIMBOOK FACE---\033[0m;"+
-			"echo ;"+
-			"echo \033[91m"+ (_('strterminalfollowsteps')) +"\033[0m;"+
-			"echo ;"+
-			"echo \033[91m"+ (_('strterminalfollowsteps2')) +"\033[0m;"+
-			"echo ;"+
-			"echo "+ (_('strterminalfollowsteps3')) +";"+
-			"read -n 1;"+
-			"echo ;"+
-			"sudo add-apt-repository ppa:boltgolt/howdy -y;"+
-			"sudo apt update;"+
-			"sudo apt install howdy -y;"+
-			"sudo pip3 install dlib;"+
-			"echo \033[91m"+ (_('strterminalcompleted')) +"\033[0m;"+
-			"touch /tmp/install_completed; "+
-			"exit 0'"], shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
+#: slimbookface.py:550
+msgid "strterminalfollowsteps3"
+msgstr ""
 
-		while not os.path.exists("/tmp/install_completed"):
-			time.sleep(2)
-		try:
-			os.remove("/tmp/install_completed")
-		except:
-			print('')
+#: slimbookface.py:558
+msgid "strterminalcompleted"
+msgstr ""
 
-		if str(subprocess.getoutput('which howdy')) == '':
-			self.buttonAddFace.set_sensitive(False)
-			self.buttonAddFace.set_tooltip_text(_('strtooltipofacerecognitionauth'))
-			self.buttonOnOff.set_sensitive(False)
-			self.buttonOnOff.set_tooltip_text(_('strtooltipofacerecognitionauth'))
-			buttonInstallDriver.set_sensitive(True)
-			buttonInstallDriver.set_tooltip_text('')
-			self.buttonEnableLogin.set_sensitive(False)
-			self.buttonEnableLogin.set_tooltip_text(_('strtooltipofacerecognitionauth'))
-		else:
-			try:
-				import cv2
-			except:
-				print('')
-			self.buttonAddFace.set_sensitive(True)
-			self.buttonAddFace.set_tooltip_text('')
-			self.buttonOnOff.set_sensitive(True)
-			self.buttonOnOff.set_tooltip_text('')
-			buttonInstallDriver.set_sensitive(False)
-			buttonInstallDriver.set_tooltip_text(_('strtooltipinstallircam'))
-			self.buttonEnableLogin.set_sensitive(True)
-			self.buttonEnableLogin.set_tooltip_text('')
+#: slimbookface.py:582 slimbookface.py:595 slimbookface.py:793
+msgid "disablefacerecognition"
+msgstr ""
 
-	def on_buttonAddFace(self, buttonAddFace):
-		self.buttonAddFace.set_sensitive(False)
-		#Se guarda la fecha y hora de la última modificación del archivo del modelo del usuario donde se almancenan todos los rostros guardados por el usuario
-		try:
-			dtBefore = os.path.getmtime('/lib/security/howdy/models/'+ user +'.dat')
-			lastModModelFileBefore = datetime.fromtimestamp(dtBefore)
-		except:
-			lastModModelFileBefore = ""
-		#Se abrirá una nueva ventana donde el usuario tendrá que configurar el rostro ha añadir
-		addFace_dialog = addface.AddFaceDialog()
-		addFace_dialog.set_modal(True)
-		resultado = addFace_dialog.run()
-		if resultado == Gtk.ResponseType.ACCEPT:
-			addFace_dialog.close_ok()
-			addFace_dialog.destroy()
+#: slimbookface.py:587 slimbookface.py:600 slimbookface.py:796
+msgid "enablefacerecognition"
+msgstr ""
 
-			#Se vuelve a guardar la fecha y hora de la última modificación y se comprueba si son distintas, en caso de serlo quiere decir que se habrá añadido un nuevo rostro
-			dtAfter = os.path.getmtime('/lib/security/howdy/models/'+ user +'.dat')
-			lastModModelFileAfter = datetime.fromtimestamp(dtAfter)
+#: slimbookface.py:634
+msgid ":("
+msgstr ""
 
-			if lastModModelFileBefore != lastModModelFileAfter:
-				
-				'''facesList = []
+#: slimbookface.py:636
+msgid "str_kde"
+msgstr ""
 
-				models_path = '/lib/security/howdy/models/'+ user +'.dat'
-				try:
-					encodings = json.load(open(models_path))
-				except FileNotFoundError:
-					print("No face model known for the user " + user + ", please run:")
+#: slimbookface.py:754
+msgid "dialogwarning2"
+msgstr ""
 
-				for enc in encodings:
-					strface = enc["label"]
-					date = time.strftime('%d-%m-%Y %H:%M:%S', time.localtime(enc["time"]))
-					idface = enc["id"]
+#: slimbookface.py:754
+msgid "dialogwarning3"
+msgstr ""
 
-					listfor = (int(idface), str(strface), str(date))
+#: slimbookface.py:772
+msgid "stremailcopiednotify"
+msgstr ""
 
-					facesList.append(listfor)
+#: slimbookface.py:785
+msgid "drivercamreinstall"
+msgstr ""
 
-				listStoreFaces = Gtk.ListStore(int, str, str)
+#: slimbookface.py:788
+msgid "drivercaminstall"
+msgstr ""
 
-				for face in facesList:
-					listStoreFaces.append(list(face))
-				
-				facesTreeView = Gtk.TreeView(self.listStoreFaces)
+#: slimbookface.py:802
+msgid "strdisablewithlogin"
+msgstr ""
 
-				for i, column_title in enumerate(["ID", "Face model name", "Created date"]):
-					rendererText = Gtk.CellRendererText()
-					column_text = Gtk.TreeViewColumn(column_title, rendererText, text=i)
-					facesTreeView.append_column(column_text)'''
-				self.hide()
-				win = SlimbookFace()
-				win.show_all()
-				win.connect("destroy", Gtk.main_quit)
-				
-		else:
-			addFace_dialog.destroy()
-		self.buttonAddFace.set_sensitive(True)
+#: slimbookface.py:805
+msgid "strenablewithlogin"
+msgstr ""
 
-	def on_buttonCopyEmail_clicked(self, buttonCopyEmail):
-		self.clipboard = Gtk.Clipboard.get(Gdk.SELECTION_CLIPBOARD)
-		self.clipboard.set_text('dev@slimbook.es', -1)
-		os.system("notify-send 'Slimbook Face' '"+ (_("stremailcopiednotify")) +"' -i '" + '/usr/share/slimbookface/images/icono.png' + "'")
-	
-	def onSelectionChanged(self, treeView, buttonDelete):
-		buttonDelete.set_sensitive(True)
+#: slimbookface.py:810 slimbookface.py:813
+msgid "straddnewfacemodel"
+msgstr ""
 
-	def on_faceDelBtn_clicked(self, button, tree_selection, treeview) :
-		(model, pathlist) = tree_selection.get_selected_rows()
-		for path in pathlist :
-			tree_iter = model.get_iter(path)
-			faceid = model.get_value(tree_iter,0)
-			facename = model.get_value(tree_iter, 1)
-		
-		pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-			filename='/usr/share/slimbookface/images/icono.png',
-			width=90,
-			height=90,
-			preserve_aspect_ratio=True)
-		icon_MsgDialog = Gtk.Image.new_from_pixbuf(pixbuf)
-		icon_MsgDialog.show()
+#: slimbookface.py:934
+msgid "createddateface"
+msgstr ""
 
-		dialog = Gtk.MessageDialog(type= Gtk.MessageType.QUESTION,
-			buttons= Gtk.ButtonsType.YES_NO,
-			message_format=(_('dialogwarning1')))
-		dialog.set_image(icon_MsgDialog)
-		dialog.format_secondary_text((_('dialogwarning2')) +'\"'+ facename + '\" '+ (_('dialogwarning3')))
-		response = dialog.run()
-		
-		#En caso afirmativo se le pide la contraseña al usuario y se envian 2 variables, una indicando la operación a realizar y otra con el id del rostro para poder eliminarlo
-		if response == Gtk.ResponseType.YES:
-			os.system('pkexec python3 /usr/share/slimbookface/slimbookface-howdy.py delete '+ str(faceid))
-			model.remove(tree_iter)
-			models_path = '/lib/security/howdy/models/'+ user +'.dat'
-			try:
-				encodings = json.load(open(models_path))
-			except FileNotFoundError:
-				print("No face model known for the user " + user)
-				encodings = ""
-			if encodings == "":
-				self.hide()
-				win = SlimbookFace()
-				win.show_all()
-				win.connect("destroy", Gtk.main_quit)
+#: slimbookface.py:934
+msgid "facemodelname"
+msgstr ""
 
-		elif response == Gtk.ResponseType.NO:
-			print('Operation canceled')
+#: slimbookface.py:956
+msgid "str_installWarn"
+msgstr ""
 
-		dialog.destroy()
+#: slimbookface.py:974
+msgid "straddfacetitle"
+msgstr ""
 
-if __name__ == "__main__":
-	if __file__.startswith('/usr') or os.getcwd().startswith('/usr'):
-		sys.path.insert(1, '/usr/share/slimbookface')
-	else:
-		sys.path.insert(1, os.path.normpath(
-			os.path.join(os.getcwd(), '../src')))
-	import addface
-	win = SlimbookFace()
-	win.connect("destroy", Gtk.main_quit)
-	win.show_all()
-	Gtk.main()
+#: slimbookface.py:990
+msgid "strsteps1"
+msgstr ""
+
+#: slimbookface.py:995
+msgid "strsteps2"
+msgstr ""
+
+#: slimbookface.py:995
+msgid "strsteps3"
+msgstr ""
+
+#: slimbookface.py:1008
+msgid "strsteps4"
+msgstr ""
+
+#: slimbookface.py:1008
+msgid "strsteps5"
+msgstr ""
+
+#: slimbookface.py:1012
+msgid "strbuttonwebcam"
+msgstr ""
+
+#: slimbookface.py:1021
+msgid "strsteps6"
+msgstr ""
+
+#: slimbookface.py:1021
+msgid "strsteps7"
+msgstr ""
+
+#: slimbookface.py:1037
+msgid "stralertaddface"
+msgstr ""
+
+#: slimbookface.py:1039
+msgid "stralertaddface2"
+msgstr ""
+

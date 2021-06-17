@@ -1,3 +1,21 @@
+slimbookface (1.4.2beta) focal; urgency=medium
+
+  * Added new functions (select device & recognition level)!
+
+ -- slimbook <sat@slimbook.es>  Thu, 17 Jun 2021 13:08:02 +0200
+
+slimbookface (1.4.1beta) focal; urgency=medium
+
+  * Added new functions (select device & recognition level)!
+
+ -- slimbook <sat@slimbook.es>  Mon, 31 May 2021 13:08:02 +0200
+
+slimbookface (1.3beta) focal; urgency=medium
+
+  * Fix install driver!
+
+ -- slimbook <sat@slimbook.es>  Wed, 25 Aug 2020 18:08:02 +0200
+
 slimbookface (1.2beta) bionic; urgency=medium
 
   * You can disable or enable face recognition in login screen!

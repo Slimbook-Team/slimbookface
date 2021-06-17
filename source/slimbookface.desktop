@@ -1,9 +1,9 @@
 [Desktop Entry]
 Name=Slimbook Face
-Version=1.0beta
+Version=1.4beta
 Exec=slimbookface
-Comment=Authenticate without using password, only using your face!
-Icon=/usr/share/pixmaps/slimbookface.png
+Comment=Authenticate without using password, just using your face!
+Icon=slimbookface
 Type=Application
 Terminal=false
 StartupNotify=true

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -x
+
+python3 /usr/share/slimbookface/slimbookface-howdy.py $1 $2

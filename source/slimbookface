@@ -9,7 +9,7 @@ if __name__ == "__main__":
     pgrep = subprocess.getoutput("pgrep slimbookface")
     numProcRunning = pgrep.split('\n')
     if len(numProcRunning) > 1:
-        print('Slimbook Face it is in execution')
+        print('Slimbook Face is in execution')
     else:
-        os.system('python3 /usr/share/slimbookface/slimbookface')
+        os.system('python3 /usr/share/slimbookface/src/slimbookface.py')
 exit(0)

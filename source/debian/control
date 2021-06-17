@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: slimbook <sat@slimbook.es>
 Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.6
-Homepage: <http://slimbook.es>
+Homepage: http://slimbook.es
 
 Package: slimbookface
 Architecture: all
@@ -19,6 +19,8 @@ Depends: ${misc:Depends}, ${python:Depends},
 	gir1.2-glib-2.0,
 	libgirepository-1.0-1,
 	gir1.2-notify-0.7,
-	libnotify-bin
+	libnotify-bin,
+	xdotool
 Description: Slimbook Face
- facial and biometric recognition and you don't need introduce the password
+ Facial and biometric recognition allows you not to introduce the password
+ 
