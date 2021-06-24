@@ -2,9 +2,6 @@
 
 Slimbook Face is an application that allows you to graphically manage multiple faces with boltgolt/howdy and enable PAM authentication throughout the system, or disable it at login, since login fails in some distributions.
 
-![alt text](https://slimbook.es/github/slimbookface/screenshot.png "Screenshot GUI")
-
-
 ![en_facecreated](https://user-images.githubusercontent.com/18195266/123246408-0d8f6500-d4e6-11eb-9112-b607c3a55b66.png)
 
 Here you have link to the app tutorial!
