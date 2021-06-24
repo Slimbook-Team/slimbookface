@@ -167,11 +167,11 @@ msgstr "The e-mail has been copied to the clipboard"
 
 #: slimbookface.py:750
 msgid "drivercamreinstall"
-msgstr "Reinstall webcam software"
+msgstr "Reinstall webcam software (Howdy)"
 
 #: slimbookface.py:753
 msgid "drivercaminstall"
-msgstr "Install webcam software"
+msgstr "Install webcam software (Howdy)"
 
 #: slimbookface.py:766
 msgid "strdisablewithlogin"
