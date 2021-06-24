@@ -9,7 +9,6 @@ To install this application, open a Terminal window (Ctrl+Alt+T) and add the Sli
 
 ```console
    sudo add-apt-repository ppa:slimbook/slimbook
-   
    sudo apt install slimbookface
 ```
 
