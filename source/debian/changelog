@@ -1,3 +1,8 @@
+slimbookface (1.4.3) focal; urgency=medium
+
+  * Readjust release
+
+ -- slimbook <sat@slimbook.es>  Thu, 24 Jun 2021 13:08:02 +0200
 slimbookface (1.4.2beta) focal; urgency=medium
 
   * Added new functions (select device & recognition level)!
