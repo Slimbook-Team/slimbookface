@@ -131,8 +131,6 @@ class SlimbookFace(Gtk.Window):
             lbl_download.set_name("released") 
             iconDownload.set_name("released") 
 
-        
-        #lbl_download.set_name("margin")
 
         evnt_download = Gtk.EventBox()
         evnt_download.set_property("name" ,"howdy_download")
@@ -157,11 +155,12 @@ class SlimbookFace(Gtk.Window):
         evnt_activate.connect("button_press_event", self._btnActivate_clicked, iconActivate, lbl_activate)
 
         # Loading state
-        if os.system('cat /lib/security/howdy/config.ini | grep disabled | grep true') == 0:
-            iconActivate.set_name("released")
+        if os.system('cat /lib/security/howdy/config.ini | grep disabled | grep false') == 0:
+            iconActivate.set_name("clicked")
 
         else:
-            iconActivate.set_name("clicked")
+            iconActivate.set_name("released")
+            
 
         self.button_change(evnt_activate, iconActivate, lbl_activate)
 
@@ -550,9 +549,7 @@ class SlimbookFace(Gtk.Window):
                 "echo ;"+
                 "sudo apt purge howdy -y;"+
                 "sudo add-apt-repository ppa:boltgolt/howdy -y;"+
-                "sudo apt update;"+
-                "sudo apt install howdy -y;"+
-                "sudo pip3 install dlib;"+
+                "sudo apt install howdy;"+
                 "echo \033[91m"+ (_('strterminalcompleted')) +"\033[0m;"+
                 "touch /tmp/install_completed; "+
                 "exit 0'"], shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
@@ -566,6 +563,11 @@ class SlimbookFace(Gtk.Window):
         except:
             print("Installation Failed")
 
+        self.hide()
+        win = SlimbookFace()
+        win.show_all()
+        win.connect("destroy", Gtk.main_quit)
+
     def _btnActivate_clicked(self, EventBox, EventButton, iconActivate, lbl_activate):
         print("\nActivate clicked")  
 
@@ -576,7 +578,7 @@ class SlimbookFace(Gtk.Window):
                 if os.system('cat /lib/security/howdy/config.ini | grep disabled | grep true') == 0:          
                     # If command enable works
                     if os.system('pkexec slimbookface-howdy-pkexec enable none') == 0:
-                    #if os.system('pkexec python3 /usr/share/slimbookface/slimbookface-howdy.py enable ""') == 0:
+                   
                         lbl_activate.set_label(_('disablefacerecognition'))
                         iconActivate.set_name("clicked")
                         self.button_change(EventBox, iconActivate, lbl_activate)
@@ -589,7 +591,7 @@ class SlimbookFace(Gtk.Window):
                 else:
                     print("howdy recognition wasn't disabled, going to disable")
                     if os.system('pkexec slimbookface-howdy-pkexec disable none') == 0:
-                    #if os.system('pkexec python3 /usr/share/slimbookface/slimbookface-howdy.py disable ""') == 0:
+                    
                         lbl_activate.set_label(_("disablefacerecognition"))
                         iconActivate.set_name("released")
                         self.button_change(EventBox, iconActivate, lbl_activate)
@@ -656,15 +658,14 @@ class SlimbookFace(Gtk.Window):
             iconFace.set_name("clicked") 
             self.button_change(EventBox, iconFace, lbl_face)
 
-            #Se guarda la fecha y hora de la última modificación del archivo del modelo del usuario donde se almancenan todos los rostros guardados por el usuario
+            #Saving datetime of file modification
             try:
                 dtBefore = os.path.getmtime('/lib/security/howdy/models/'+ user +'.dat')
                 lastModModelFileBefore = datetime.fromtimestamp(dtBefore)
             except:
                 lastModModelFileBefore = ""
-            #Se abrirá una nueva ventana donde el usuario tendrá que configurar el rostro ha añadir
             
-            
+            #Opens addface window
             addFace_dialog = AddFaceDialog()
             addFace_dialog.set_modal(True)
             resultado = addFace_dialog.run()
@@ -673,28 +674,29 @@ class SlimbookFace(Gtk.Window):
                 addFace_dialog.close_ok()
                 addFace_dialog.destroy()
 
-                #Se vuelve a guardar la fecha y hora de la última modificación y se comprueba si son distintas, en caso de serlo quiere decir que se habrá añadido un nuevo rostro
+                #Saving again datetime of file modicatio to check if it has ben saved
                 dtAfter = os.path.getmtime('/lib/security/howdy/models/'+ user +'.dat')
                 lastModModelFileAfter = datetime.fromtimestamp(dtAfter)
 
                 """ self.facesTreeView=self.faceList()
                 self.faces.remove(self.facesTreeView)
                 self.faces.show_all() """
+
                 self.hide()
                 win = SlimbookFace()
                 win.show_all()
                 win.connect("destroy", Gtk.main_quit)
 
             else:
-                addFace_dialog.destroy()
-
-            
-
-            iconFace.set_name("released") 
-            self.button_change(EventBox, iconFace, lbl_face)
+                addFace_dialog.destroy()        
+                iconFace.set_name("released") 
+                self.button_change(EventBox, iconFace, lbl_face)
         else:
             print("Install driver")
             self.shoutDriverWarning()
+
+        iconFace.set_name("released") 
+        self.button_change(EventBox, iconFace, lbl_face)
 
     def onSelectionChanged(self, tree_selection, buttonDelete):
         buttonDelete.set_sensitive(True)
@@ -913,7 +915,7 @@ class SlimbookFace(Gtk.Window):
                 face = (int(idface), str(strface), str(date))
                 listStoreFaces.append(face)
             
-            #TreView que almacena el listado de los rostros añadidos por el usuario
+            #TreView whit added face models
             
             facesTreeView = Gtk.TreeView(model=listStoreFaces)
 
@@ -942,11 +944,14 @@ class SlimbookFace(Gtk.Window):
         dialog.format_secondary_text(_("str_installWarn"))
         response = dialog.run()
         
-        #En caso afirmativo se le pide la contraseña al usuario y se envian 2 variables, una indicando la operación a realizar y otra con el id del rostro para poder eliminarlo
+        
         if response == Gtk.ResponseType.YES:
             print("Install driver")
             self.installDriver()
-
+            self.hide()
+            win = SlimbookFace()
+            win.show_all()
+            win.connect("destroy", Gtk.main_quit)
 
         elif response == Gtk.ResponseType.NO:
             print('Operation canceled')
@@ -1018,7 +1023,7 @@ class AddFaceDialog(Gtk.Dialog):
     def close_ok(self):
         FaceModelName = self.entryFaceModelName.get_text()
         FaceModelName = '\"'+ FaceModelName + '\"'
-        #if os.system('pkexec slimbookface-howdy-pkexec add '+ FaceModelName + ' | grep -i "added a new model"') == 0:
+    
         if os.system('pkexec slimbookface-howdy-pkexec add '+ FaceModelName + ' | grep -i "added a new model"') == 0:
             os.system("notify-send 'Slimbook Face' '"+ (_("stralertaddface")) +"' -i '" + '/usr/share/slimbookface/images/icono.png' + "'")
         else:

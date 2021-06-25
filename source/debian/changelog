@@ -1,3 +1,10 @@
+slimbookface (1.4.4) focal; urgency=medium
+
+  * Solving a KDE howdy install problem
+  * Loading buttons updated
+
+ -- slimbook <sat@slimbook.es>  Thu, 24 Jun 2021 13:08:02 +0200
+
 slimbookface (1.4.3) focal; urgency=medium
 
   * Readjust release
