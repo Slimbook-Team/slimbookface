@@ -6,7 +6,7 @@ Slimbook Face is an application that allows you to graphically manage multiple f
 
 To install this application, open a Terminal window (Ctrl+Alt+T) and add the Slimbook repo to your system with the following commands:
 
-
+# Install
 ```bat
    sudo add-apt-repository ppa:slimbook/slimbook
    sudo apt install slimbookface
