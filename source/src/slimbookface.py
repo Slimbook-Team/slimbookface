@@ -577,29 +577,46 @@ class SlimbookFace(Gtk.Window):
                 # If howdy is DISabled
                 if os.system('cat /lib/security/howdy/config.ini | grep disabled | grep true') == 0:          
                     # If command enable works
-                    if os.system('pkexec slimbookface-howdy-pkexec enable none') == 0:
-                   
-                        lbl_activate.set_label(_('disablefacerecognition'))
-                        iconActivate.set_name("clicked")
-                        self.button_change(EventBox, iconActivate, lbl_activate)
+
+                    cmd = 'pkexec slimbookface-howdy-pkexec enable none'
+
+                    try:
+                        subprocess.Popen(
+                            ["x-terminal-emulator --new-tab -e $SHELL -c '"+
+                            cmd+"; "+
+                            "exit 0'"], shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
+
+                    except:
+                        print("Command Failed")
+            
+                    #subprocess.Popen(["gnome-terminal", "--command="+cmd]) # Funciona a medias ok
+                 
+                    lbl_activate.set_label(_('disablefacerecognition'))
+                    iconActivate.set_name("clicked")
+                    self.button_change(EventBox, iconActivate, lbl_activate)
                        
-                    else:
-                        lbl_activate.set_label(_("enablefacerecognition"))
-                        iconActivate.set_name("released")
-                        self.button_change(EventBox, iconActivate, lbl_activate)
+                  
                         
                 else:
                     print("howdy recognition wasn't disabled, going to disable")
-                    if os.system('pkexec slimbookface-howdy-pkexec disable none') == 0:
-                    
-                        lbl_activate.set_label(_("disablefacerecognition"))
-                        iconActivate.set_name("released")
-                        self.button_change(EventBox, iconActivate, lbl_activate)
+                    cmd = 'pkexec slimbookface-howdy-pkexec disable none'
+            
+                    try:
+                        subprocess.Popen(
+                            ["x-terminal-emulator --new-tab -e $SHELL -c '"+
+                            cmd+"; "+
+                            "exit 0'"], shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
+
+                    except:
+                        print("Command Failed")
+
+                    #subprocess.Popen(["gnome-terminal", "--command="+cmd]) # Funciona a medias ok
+
+                                   
+                    lbl_activate.set_label(_("disablefacerecognition"))
+                    iconActivate.set_name("released")
+                    self.button_change(EventBox, iconActivate, lbl_activate)
                         
-                    else:
-                        lbl_activate.set_label(_('enablefacerecognition'))
-                        iconActivate.set_name("clicked")
-                        self.button_change(EventBox, iconActivate, lbl_activate)
                         
         else:
             print("Needs to install driver")
@@ -655,6 +672,7 @@ class SlimbookFace(Gtk.Window):
         print("Face clicked")
 
         if subprocess.getstatusoutput('which howdy')[0] == 0:
+
             iconFace.set_name("clicked") 
             self.button_change(EventBox, iconFace, lbl_face)
 
@@ -674,13 +692,11 @@ class SlimbookFace(Gtk.Window):
                 addFace_dialog.close_ok()
                 addFace_dialog.destroy()
 
-                #Saving again datetime of file modicatio to check if it has ben saved
-                dtAfter = os.path.getmtime('/lib/security/howdy/models/'+ user +'.dat')
-                lastModModelFileAfter = datetime.fromtimestamp(dtAfter)
-
-                """ self.facesTreeView=self.faceList()
-                self.faces.remove(self.facesTreeView)
-                self.faces.show_all() """
+                #Saving again datetime of file modification to check if it has been saved
+                #dtAfter = os.path.getmtime('/lib/security/howdy/models/'+ user +'.dat')
+                #lastModModelFileAfter = datetime.fromtimestamp(dtAfter)
+                
+                os.system("sleep 5")
 
                 self.hide()
                 win = SlimbookFace()
@@ -690,13 +706,19 @@ class SlimbookFace(Gtk.Window):
             else:
                 addFace_dialog.destroy()        
                 iconFace.set_name("released") 
-                self.button_change(EventBox, iconFace, lbl_face)
+                self.button_change(EventBox, iconFace, lbl_face)           
+
         else:
             print("Install driver")
             self.shoutDriverWarning()
 
         iconFace.set_name("released") 
         self.button_change(EventBox, iconFace, lbl_face)
+
+        '''self.hide()
+        win = SlimbookFace()
+        win.show_all()
+        win.connect("destroy", Gtk.main_quit)'''
 
     def onSelectionChanged(self, tree_selection, buttonDelete):
         buttonDelete.set_sensitive(True)
@@ -748,7 +770,19 @@ class SlimbookFace(Gtk.Window):
         #En caso afirmativo se le pide la contraseña al usuario y se envian 2 variables, una indicando la operación a realizar y otra con el id del rostro para poder eliminarlo
         if response == Gtk.ResponseType.YES:
             #if os.system('pkexec slimbookface-howdy-pkexec delete '+ str(faceid)) == 0:
-            os.system('pkexec slimbookface-howdy-pkexec delete '+ str(faceid))
+            cmd = 'pkexec slimbookface-howdy-pkexec delete '+ str(faceid)
+            
+            try:
+                subprocess.Popen(
+                    ["x-terminal-emulator --new-tab -e $SHELL -c '"+
+                    cmd+"; "+
+                    "exit 0'"], shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
+
+            except:
+                print("Command Failed")
+
+            #subprocess.Popen(["gnome-terminal", "--command="+cmd]) # Funciona a medias ok
+
             model.remove(tree_iter) # ---> esto borra directamente de la lista la cara en la interfaz
             
 
@@ -842,14 +876,20 @@ class SlimbookFace(Gtk.Window):
         #print(str(update))
         #print("/dev/v4l/by-path/pci-0000:04:00.3-usb-0:3:1.2-video-index0")
 
-        call = os.system("pkexec slimbookface-howdy-pkexec update_config "+str(update))
+        cmd = "pkexec slimbookface-howdy-pkexec update_config "+str(update)
+        print(cmd) 
 
-        if call == 0:
-            print("File updated correctly!")
-            return 0
-        else:
-            print("Error updating file on pkexec slimbookface-howdy-pkexec update_config "+str(update))
-            return 1      
+        try:
+            subprocess.Popen(
+                ["x-terminal-emulator --new-tab -e $SHELL -c '"+
+                cmd+"; "+
+                "exit 0'"], shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
+
+        except:
+            print("Command Failed")
+
+        #p = subprocess.Popen(["gnome-terminal", "--command="+cmd]) 
+  
 
     def get_value(self, variable):
         config_file = '/lib/security/howdy/config.ini'
@@ -1017,17 +1057,62 @@ class AddFaceDialog(Gtk.Dialog):
 
     def show_cam(self, buttonShowCam):
 
-        if os.system('pkexec slimbookface-howdy-pkexec test none') == 0:	
-            print("Howdy test")
+        #if os.system('pkexec slimbookface-howdy-pkexec test none') == 0:	
+        #   print("Howdy test")
+
+        cmd = "pkexec slimbookface-howdy-pkexec test none"    
+        print(cmd) 
+
+
+        subprocess.Popen(
+            ["x-terminal-emulator -e $SHELL -c '"+
+            cmd+"; "+
+            "exit 0'"], shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
+
+
+
+        #subprocess.Popen(["gnome-terminal", "--command=pkexec slimbookface-howdy-pkexec test none & disown"]) # Funciona a medias ok 
+        #subprocess.call(["gnome-terminal", "--command=pkexec slimbookface-howdy-pkexec test none "]) # Funciona a medias ok 
+
+        #os.popen("pkexec slimbookface-howdy-pkexec test none ") # No funciona
+
+        #subprocess.Popen("pkexec slimbookface-howdy-pkexec test none ",shell=True,stdout=subprocess.PIPE, stderr=subprocess.STDOUT) #No funciona a medias
+ 
+        #subprocess.run(['pkexec slimbookface-howdy-pkexec test none'], shell=True) # No funciona a medias
+
+        #subprocess.Popen(["gnome-terminal","pkexec slimbookface-howdy-pkexec test none "]) # No funciona en ninguno
+
+        #subprocess.call("pkexec slimbookface-howdy-pkexec test none ", shell = True) # No funciona
+
+
+        #subprocess.call(['pkexec','slimbookface-howdy-pkexec','test','none'], shell = True) # No funciona porque pkexec no detecta el programa
+     
+        #subprocess.Popen(['pkexec','slimbookface-howdy-pkexec test none'], shell=True) # No funciona porque pkexec no detecta el programa
 
     def close_ok(self):
         FaceModelName = self.entryFaceModelName.get_text()
         FaceModelName = '\"'+ FaceModelName + '\"'
-    
-        if os.system('pkexec slimbookface-howdy-pkexec add '+ FaceModelName + ' | grep -i "added a new model"') == 0:
-            os.system("notify-send 'Slimbook Face' '"+ (_("stralertaddface")) +"' -i '" + '/usr/share/slimbookface/images/icono.png' + "'")
-        else:
-            os.system("notify-send 'Slimbook Face' '"+ (_("stralertaddface2")) +"' -i '" + '/usr/share/slimbookface/images/icono.png' + "'")
+        
+        cmd = "pkexec slimbookface-howdy-pkexec add "+ FaceModelName + " | grep -i added"    
+        print(cmd) 
+
+        try:
+            subprocess.Popen(
+                ["x-terminal-emulator --new-tab -e $SHELL -c '"+
+                cmd+"; "+
+                "exit 0'"], shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
+
+        except:
+            print("Command Failed")
+
+        #p = subprocess.Popen(["gnome-terminal", "--command="+cmd]) 
+
+
+        
+        #if os.system('pkexec slimbookface-howdy-pkexec add '+ FaceModelName + ' | grep -i "added a new model"') == 0:
+        #    os.system("notify-send 'Slimbook Face' '"+ (_("stralertaddface")) +"' -i '" + '/usr/share/slimbookface/images/icono.png' + "'")
+        #else:
+        #    os.system("notify-send 'Slimbook Face' '"+ (_("stralertaddface2")) +"' -i '" + '/usr/share/slimbookface/images/icono.png' + "'")
 
 
 if __name__ == "__main__":
