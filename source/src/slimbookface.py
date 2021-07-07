@@ -539,7 +539,7 @@ class SlimbookFace(Gtk.Window):
             subprocess.Popen(
                 ["x-terminal-emulator --new-tab --hold -e $SHELL -c '"+
                 "echo \033[34m---SLIMBOOK FACE---\033[0m;"+
-                "echo ;"+
+                "echo $SHELL;"+
                 "echo \033[91m"+ (_('strterminalfollowsteps')) +"\033[0m;"+
                 "echo ;"+
                 "echo \033[91m"+ (_('strterminalfollowsteps2')) +"\033[0m;"+
@@ -549,6 +549,7 @@ class SlimbookFace(Gtk.Window):
                 "echo ;"+
                 "sudo apt purge howdy -y;"+
                 "sudo add-apt-repository ppa:boltgolt/howdy -y;"+
+                "sudo apt update;"+
                 "sudo apt install howdy;"+
                 "echo \033[91m"+ (_('strterminalcompleted')) +"\033[0m;"+
                 "touch /tmp/install_completed; "+

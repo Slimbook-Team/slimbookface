@@ -1,3 +1,11 @@
+
+slimbookface (1.4.6) focal; urgency=medium
+
+  * Solving a Linux Mint problem
+  * On KDE installing howdy, avoids spt update
+
+ -- slimbook <sat@slimbook.es>  Wed, 7 Jul 2021 13:08:02 +0200
+
 slimbookface (1.4.5) focal; urgency=medium
 
   * Solving a Linux Mint problem
