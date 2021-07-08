@@ -16,7 +16,7 @@ To install this application, open a Terminal window (Ctrl+Alt+T) and add the Sli
 
 Here you have link to the app tutorial!
 
-https://slimbook.es/en/tutoriales/aplicaciones-slimbook/400-slimbook-face-biometric-recognition-and-dont-enter-more-passwords
+https://slimbook.es/en/tutoriales/aplicaciones-slimbook/514-en-slimbook-intel-controller
 --
 
 This software is protected with the GPLv3 license, which allows you to modify it with the same license and authorship. 
