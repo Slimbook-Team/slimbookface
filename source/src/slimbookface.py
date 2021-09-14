@@ -38,7 +38,6 @@ try:
 except:
     idiomas = ['en']
 
-idiomas = ['it']
 
 t = gettext.translation('slimbookface',
 						currpath+'/locale',
