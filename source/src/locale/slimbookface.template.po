@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-06-15 13:38+0200\n"
+"POT-Creation-Date: 2021-09-14 14:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,235 +15,227 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: slimbookface.py:111
+#: slimbookface.py:106
 msgid "strmainpage"
 msgstr ""
 
-#: slimbookface.py:112
+#: slimbookface.py:107
 msgid "strinfopage"
 msgstr ""
 
-#: slimbookface.py:225
+#: slimbookface.py:223
 msgid "str_faces"
 msgstr ""
 
-#: slimbookface.py:233
+#: slimbookface.py:231
 msgid "facemodelsempty"
 msgstr ""
 
-#: slimbookface.py:245
+#: slimbookface.py:243
 msgid "removefaceselected"
 msgstr ""
 
-#: slimbookface.py:267
+#: slimbookface.py:265
 msgid "str_devices"
 msgstr ""
 
-#: slimbookface.py:275
+#: slimbookface.py:273
 msgid "str_recognition"
 msgstr ""
 
-#: slimbookface.py:279
+#: slimbookface.py:277
 msgid "Fast"
 msgstr ""
 
-#: slimbookface.py:285
+#: slimbookface.py:283
 msgid "Balanced"
 msgstr ""
 
-#: slimbookface.py:291
+#: slimbookface.py:289
 msgid "Secure"
 msgstr ""
 
-#: slimbookface.py:360
+#: slimbookface.py:358
 msgid "strvisitwebsite"
 msgstr ""
 
-#: slimbookface.py:363 slimbookface.py:367
+#: slimbookface.py:361 slimbookface.py:365
 msgid "strlabelusermanual"
 msgstr ""
 
-#: slimbookface.py:363 slimbookface.py:367
+#: slimbookface.py:361 slimbookface.py:365
 msgid "strusermanual"
 msgstr ""
 
-#: slimbookface.py:371
+#: slimbookface.py:369
 msgid "strsocialnetworks1"
 msgstr ""
 
-#: slimbookface.py:371
+#: slimbookface.py:369
 msgid "strsocialnetworks2"
 msgstr ""
 
-#: slimbookface.py:376
+#: slimbookface.py:374
 msgid "strthanks1"
 msgstr ""
 
-#: slimbookface.py:376
+#: slimbookface.py:374
 msgid "strthanks2"
 msgstr ""
 
-#: slimbookface.py:380
+#: slimbookface.py:378
 msgid "strinfo1"
 msgstr ""
 
-#: slimbookface.py:380
+#: slimbookface.py:378
 msgid "strinfo2"
 msgstr ""
 
-#: slimbookface.py:387
+#: slimbookface.py:385
 msgid "strsendemail"
 msgstr ""
 
-#: slimbookface.py:394
+#: slimbookface.py:392
 msgid "strcopyemail"
 msgstr ""
 
-#: slimbookface.py:405
+#: slimbookface.py:403
 msgid "strlicense1"
 msgstr ""
 
-#: slimbookface.py:405
+#: slimbookface.py:403
 msgid "strlicense2"
 msgstr ""
 
-#: slimbookface.py:405
+#: slimbookface.py:403
 msgid "strlicense3"
 msgstr ""
 
-#: slimbookface.py:405
+#: slimbookface.py:403
 msgid "strlicense4"
 msgstr ""
 
-#: slimbookface.py:405
+#: slimbookface.py:403
 msgid "strlicense5"
 msgstr ""
 
-#: slimbookface.py:523 slimbookface.py:752 slimbookface.py:954
+#: slimbookface.py:521 slimbookface.py:766 slimbookface.py:983
 msgid "dialogwarning1"
 msgstr ""
 
-#: slimbookface.py:525
+#: slimbookface.py:523
 msgid "str_reinstallWarn"
 msgstr ""
 
-#: slimbookface.py:546
+#: slimbookface.py:543
 msgid "strterminalfollowsteps"
 msgstr ""
 
-#: slimbookface.py:548
+#: slimbookface.py:545
 msgid "strterminalfollowsteps2"
 msgstr ""
 
-#: slimbookface.py:550
+#: slimbookface.py:547
 msgid "strterminalfollowsteps3"
 msgstr ""
 
-#: slimbookface.py:558
+#: slimbookface.py:554
 msgid "strterminalcompleted"
 msgstr ""
 
-#: slimbookface.py:582 slimbookface.py:595 slimbookface.py:793
+#: slimbookface.py:595 slimbookface.py:617 slimbookface.py:818
 msgid "disablefacerecognition"
 msgstr ""
 
-#: slimbookface.py:587 slimbookface.py:600 slimbookface.py:796
-msgid "enablefacerecognition"
-msgstr ""
-
-#: slimbookface.py:634
+#: slimbookface.py:644
 msgid ":("
 msgstr ""
 
-#: slimbookface.py:636
+#: slimbookface.py:646
 msgid "str_kde"
 msgstr ""
 
-#: slimbookface.py:754
+#: slimbookface.py:768
 msgid "dialogwarning2"
 msgstr ""
 
-#: slimbookface.py:754
+#: slimbookface.py:768
 msgid "dialogwarning3"
 msgstr ""
 
-#: slimbookface.py:772
+#: slimbookface.py:798
 msgid "stremailcopiednotify"
 msgstr ""
 
-#: slimbookface.py:785
+#: slimbookface.py:810
 msgid "drivercamreinstall"
 msgstr ""
 
-#: slimbookface.py:788
+#: slimbookface.py:813
 msgid "drivercaminstall"
 msgstr ""
 
-#: slimbookface.py:802
+#: slimbookface.py:821
+msgid "enablefacerecognition"
+msgstr ""
+
+#: slimbookface.py:827
 msgid "strdisablewithlogin"
 msgstr ""
 
-#: slimbookface.py:805
+#: slimbookface.py:830
 msgid "strenablewithlogin"
 msgstr ""
 
-#: slimbookface.py:810 slimbookface.py:813
+#: slimbookface.py:835 slimbookface.py:838
 msgid "straddnewfacemodel"
 msgstr ""
 
-#: slimbookface.py:934
+#: slimbookface.py:963
 msgid "createddateface"
 msgstr ""
 
-#: slimbookface.py:934
+#: slimbookface.py:963
 msgid "facemodelname"
 msgstr ""
 
-#: slimbookface.py:956
+#: slimbookface.py:985
 msgid "str_installWarn"
 msgstr ""
 
-#: slimbookface.py:974
+#: slimbookface.py:1006
 msgid "straddfacetitle"
 msgstr ""
 
-#: slimbookface.py:990
+#: slimbookface.py:1022
 msgid "strsteps1"
 msgstr ""
 
-#: slimbookface.py:995
+#: slimbookface.py:1027
 msgid "strsteps2"
 msgstr ""
 
-#: slimbookface.py:995
+#: slimbookface.py:1027
 msgid "strsteps3"
 msgstr ""
 
-#: slimbookface.py:1008
+#: slimbookface.py:1040
 msgid "strsteps4"
 msgstr ""
 
-#: slimbookface.py:1008
+#: slimbookface.py:1040
 msgid "strsteps5"
 msgstr ""
 
-#: slimbookface.py:1012
+#: slimbookface.py:1044
 msgid "strbuttonwebcam"
 msgstr ""
 
-#: slimbookface.py:1021
+#: slimbookface.py:1053
 msgid "strsteps6"
 msgstr ""
 
-#: slimbookface.py:1021
+#: slimbookface.py:1053
 msgid "strsteps7"
-msgstr ""
-
-#: slimbookface.py:1037
-msgid "stralertaddface"
-msgstr ""
-
-#: slimbookface.py:1039
-msgid "stralertaddface2"
 msgstr ""
 
