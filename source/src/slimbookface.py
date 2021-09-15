@@ -310,9 +310,9 @@ class SlimbookFace(Gtk.Window):
             elif value == "2":
                 rb_secure.set_active(True)
             else: 
-                print("no encajan")
+                print("Can't find certainty level")
         except:
-            print("No se encuentra conf")  
+            print("Config file not found")  
 
         rb_fast.connect("toggled", self.on_radio_button_toggled)
         rb_balanced.connect("toggled", self.on_radio_button_toggled)
@@ -680,7 +680,7 @@ class SlimbookFace(Gtk.Window):
                         print("Disabled\n")
                         iconLogin.set_name("released")
             else: 
-                print("El path no existe")
+                print("Howdy config path does not exist.")
 
             self.button_change(EventBox, iconLogin, lbl_login)
 
