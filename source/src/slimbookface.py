@@ -356,11 +356,31 @@ class SlimbookFace(Gtk.Window):
         SlimbookIcon.set_halign(Gtk.Align.CENTER)
 
         web_link = Gtk.Label()
-        web_link.set_markup("<span><b><a href='https://slimbook.es/'>"+_('strvisitwebsite')+"</a></b>    </span>")
+        web_link.set_markup("<span><b><a href='https://slimbook.es/'>"+_('strvisitwebsite')+"</a></b></span>")
         web_link.set_halign(Gtk.Align.CENTER)
 
-        tutorial_link = Gtk.LinkButton(uri=(_('strusermanual')), label=(_('strlabelusermanual')))
+
+        tutorial_link = Gtk.Label()
+        tutorial_link.set_markup("<span><b><a href='"+_('strusermanual')+"'>"+_('strlabelusermanual')+"</a></b></span>")
         tutorial_link.set_halign(Gtk.Align.CENTER)
+
+        github_link = Gtk.Label()
+        github_link.set_markup("<span><b><a href='https://github.com/slimbook/slimbookface'>"+_('GitHub')+"</a></b></span>")
+        github_link.set_halign(Gtk.Align.CENTER)
+
+        translations_link = Gtk.Label()
+        translations_link.set_markup("<span><b><a href='https://github.com/slimbook/slimbookface/tree/master/source/src/locale'>"+_('Help us with translations')+"</a></b></span>")
+        translations_link.set_halign(Gtk.Align.CENTER)
+
+        link_box1 = Gtk.VBox(spacing = 10)
+        link_box1.add(web_link)
+        link_box1.pack_start(tutorial_link, True, True, 0)
+
+        link_box2 = Gtk.VBox(spacing = 10)
+        link_box2.add(translations_link)
+        link_box2.pack_start(github_link, True, True, 0)
+
+        
 
         tutorial_link = Gtk.Label()
         tutorial_link.set_markup("<span><b><a href='"+_('strusermanual')+"'>"+_('strlabelusermanual')+"</a></b>    </span>")
@@ -398,7 +418,6 @@ class SlimbookFace(Gtk.Window):
         buttonCopyEmail.set_halign(Gtk.Align.CENTER)
         hbox2.pack_start(buttonCopyEmail, False, False, 0)
         hbox2.set_halign(Gtk.Align.CENTER)
-
 
         license = Gtk.Label(label='')
         license.set_markup('<b>'+ (_('strlicense1')) +'</b>\n<span size="smaller"><b>'+ (_('strlicense2')) +'</b> '+ (_('strlicense3')) +' '+ (_('strlicense4'))+ '\n'+ (_('strlicense5')) +'</span>')
@@ -461,18 +480,17 @@ class SlimbookFace(Gtk.Window):
         social_box.pack_start(instagram_link, False, False, 0)
 
     # Grid_info attach
-        grid_info.attach(web_link, 0, 0, 5, 1)
-        grid_info.attach(tutorial_link, 0, 1, 5, 1)
-        grid_info.attach(thanks_lbl, 0, 2, 5, 1)
-        grid_info.attach(hbox2, 0, 3, 5, 1)
+        grid_info.attach(link_box1, 1, 0, 2, 2)
+        grid_info.attach(link_box2, 3, 0, 2, 2)
+        grid_info.attach(thanks_lbl, 0, 2, 6, 1)
+        grid_info.attach(hbox2, 0, 3, 6, 1)
 
-        grid_info.attach(social_media, 0, 4, 5, 1)
-        grid_info.attach(social_box, 0, 5, 5, 1)
-        grid_info.attach(license, 0, 6, 5, 1)
-        grid_info.attach(CCIcon, 0, 7, 5, 1)
+        grid_info.attach(social_media, 0, 4, 6, 1)
+        grid_info.attach(social_box, 0, 5, 6, 1)
+        grid_info.attach(license, 0, 6, 6, 1)
+        grid_info.attach(CCIcon, 0, 7, 6, 1)
 
     
-
     def _btnDownload_clicked(self, EventBox, EventButton, iconDownload, lbl_download):
 
 

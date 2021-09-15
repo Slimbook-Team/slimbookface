@@ -48,6 +48,11 @@ notebook{
     margin-bottom: 20px;
 }
 
+label:hover {
+    background: none;
+    background-color: transparent;
+}
+
 
 scrolledwindow {
     background-color: white;
