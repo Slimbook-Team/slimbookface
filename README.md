@@ -1,5 +1,7 @@
 # SlimbookFace
 
+Note: **Stable release is for 20.04**, for newer system releases, howdy installation might fail.
+
 Slimbook Face is an application that allows you to graphically manage multiple faces with [boltgolt/howdy](https://github.com/boltgolt/howdy) and enable PAM authentication throughout the system, or disable it at login, since login fails in some distributions or desktop environments (like KDE).
 
 ![en_main_faceadded](https://user-images.githubusercontent.com/18195266/123270336-1db43e00-d500-11eb-9172-fb91dd9b5050.png)
