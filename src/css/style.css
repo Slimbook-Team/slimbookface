@@ -1,0 +1,127 @@
+/* window{
+    background-image: -gtk-gradient (linear,
+                                     left top, left bottom,
+                                     from (mix (shade (rgb(21, 21, 116), 0.9), black, 0.3)),
+                                     to (mix (rgb(21, 21, 116), black, 0.9)));
+} */
+
+window{
+    background-image: url('../images/background.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+
+window link, window label, linkbutton>label{
+    color: white;
+    font-size: large;
+}
+
+
+grid{
+    margin: 10px;
+    margin-top: 15px;
+}
+
+dialog>box{
+    margin: 30px;
+    /* background-image: -gtk-gradient (linear,
+                                     left top, left bottom,
+                                     from (mix (shade (rgb(21, 21, 116), 0.9), black, 0.3)),
+                                     to (mix (rgb(21, 21, 116), black, 0.9))); */
+}
+
+notebook grid {
+    margin-top: 30px;
+}
+
+
+notebook *{
+    background-color: transparent;
+    border: 0px;
+    color: black;
+}
+
+notebook{
+    border: 0px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+label:hover {
+    background: none;
+    background-color: transparent;
+}
+
+
+scrolledwindow {
+    background-color: white;
+}
+
+
+
+messagedialog button{
+    margin: 5px;
+}
+
+messagedialog button, dialog button, dialog entry{
+    border: 2px;
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: rgb(67, 67, 253);
+    border-style: solid;
+}
+
+window button>label, scrolledwindow label, #radios label{
+    color: black;
+}
+window button:disabled>label{
+    color: grey;
+}
+
+#delete_face, window button{
+    background: white;
+}
+
+#black{
+    background-color: #111111;
+}
+
+#faces{
+    margin-top:0px;
+}
+
+
+#margin {
+    margin-bottom: 50px;
+}
+
+#radios {
+    background-color: white;
+    border-radius: 5px;
+}
+
+
+
+ radio {
+    min-width: 16px;
+    min-height: 16px;
+    margin: 0 2px; 
+    -gtk-icon-source: builtin; 
+
+ }
+/*  radiobutton:checked {
+    font-weight: bold;
+ } */
+
+
+radio:only-child, menu menuitem
+radio {
+    margin: 0; 
+}
+
+treeview:hover, treeview:selected {
+    background-color: blue;
+    color:white;
+}

@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import os
+import sys
+import subprocess
+
+def main():
+    action = ""
+    
+    if (len(sys.argv)>1):
+        action = sys.argv[1]
+    
+    if (action == "enable"):
+        os.system("howdy disable 0")
+    elif (action == "disable"):
+        os.system("howdy disable 1")
+    elif (action == "add"):
+        if (len(sys.argv)>2):
+            os.system("howdy add {0}".format(sys.argv[2]))
+    elif (action == "remove"):
+        if (len(sys.argv)>2):
+            os.system("howdy remove {0} -y".format(sys.argv[2]))
+    elif (action == "enable-login"):
+        pass
+    elif (action == "disable-login"):
+        pass
+    elif (action == "test"):
+        os.system("howdy test")
+    else:
+        pass
+    sys.exit(0)
+if __name__ == "__main__":
+    main()
