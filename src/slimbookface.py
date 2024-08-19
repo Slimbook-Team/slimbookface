@@ -237,9 +237,9 @@ class SlimbookFace(Gtk.Window):
         
 
         self.buttonDeleteFace = Gtk.Button(label=(_('Delete selected face')))
-        self.buttonDeleteFace.set_sensitive(False)
+        #self.buttonDeleteFace.set_sensitive(False)
         self.buttonDeleteFace.set_name("detele_face")
-        #self.buttonDeleteFace.connect("clicked", self.on_faceDelBtn_clicked, self.facesTreeView.get_selection(), self.facesTreeView)
+        self.buttonDeleteFace.connect("clicked", self.on_button_delete_face_clicked, self.facesTreeView.get_selection(), self.facesTreeView)
         
         self.tree_selection = self.facesTreeView.get_selection()
         #self.tree_selection.connect("changed", self.onSelectionChanged, self.buttonDeleteFace)
@@ -380,7 +380,7 @@ class SlimbookFace(Gtk.Window):
         tutorial_link.set_halign(Gtk.Align.CENTER)
 
         social_media = Gtk.Label()
-        social_media.set_markup('<span>'+(_('strsocialnetworks1')) + "<a href='https://www.patreon.com/slimbook'> patreon </a>" +(_('strsocialnetworks2'))+'</span>')
+        social_media.set_markup('<span>'+(_('If you want to support the Slimbook team with the development of this app and several more to come, you can do so by joining our')) + "<a href='https://www.patreon.com/slimbook'> patreon </a>" +(_('or buying a brand new Slimbook.'))+'</span>')
         social_media.set_line_wrap(True)
         social_media.set_justify(Gtk.Justification.CENTER)
 
@@ -389,7 +389,7 @@ class SlimbookFace(Gtk.Window):
         thanks_lbl.set_justify(Gtk.Justification.CENTER)
 
         info_lbl = Gtk.Label()
-        info_lbl.set_markup("\n<span><b>"+ (_("Info:")) +" </b>"+ (_("strinfo2")) +"</span>")
+        info_lbl.set_markup("\n<span><b>"+ (_("Info:")) +" </b>"+ (_("Contact with us if you find something wrong.")) +"</span>")
         info_lbl.set_justify(Gtk.Justification.CENTER)
 
 
@@ -632,7 +632,11 @@ class SlimbookFace(Gtk.Window):
         
         addFace_dialog = AddFaceDialog()
         addFace_dialog.set_modal(True)
-        resultado = addFace_dialog.run()
+        response = addFace_dialog.run()
+        
+        if response == Gtk.ResponseType.ACCEPT:
+            addFace_dialog.close_ok()
+        
         addFace_dialog.destroy()
         icon_face.set_name("released") 
         self.button_change(EventBox, icon_face, label_face)
@@ -652,6 +656,38 @@ class SlimbookFace(Gtk.Window):
             icon_activate.set_name("clicked")
             self.button_change(EventBox, icon_activate, label_activate)    
 
+    def on_button_delete_face_clicked(self, button, tree_selection, treeview) :
+        print("delete face")
+        (model, pathlist) = tree_selection.get_selected_rows()
+        for path in pathlist :
+            tree_iter = model.get_iter(path)
+            faceid = model.get_value(tree_iter,0)
+            facename = model.get_value(tree_iter, 1)
+    
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+            filename=currpath+'/images/icono.png',
+            width=90,
+            height=90,
+            preserve_aspect_ratio=True)
+        icon_MsgDialog = Gtk.Image.new_from_pixbuf(pixbuf)
+        icon_MsgDialog.show()
+
+        dialog = Gtk.MessageDialog(message_type= Gtk.MessageType.QUESTION,
+            image = icon_MsgDialog,
+            buttons= Gtk.ButtonsType.YES_NO,
+            text=(_('Alert!')))
+        
+        dialog.format_secondary_text((_('Are you sure that you want delete')) +' \"'+ facename + '\" '+ (_('\'s face?')))
+        response = dialog.run()
+        
+        if response == Gtk.ResponseType.YES:
+            print("destroying face {0}".format(faceid))
+            os.system("pkexec slimbookface-helper remove {0}".format(faceid))
+            model.remove(tree_iter)
+        
+        dialog.destroy()
+    
+    
 class AddFaceDialog(Gtk.Dialog):
 
     def __init__(self):
@@ -713,7 +749,8 @@ class AddFaceDialog(Gtk.Dialog):
         print("show")
         
     def close_ok(self):
-        print("close")
+        face_name = self.entryFaceModelName.get_text()
+        print(face_name)
         
 if __name__ == "__main__":
     if __file__.startswith('/usr') or os.getcwd().startswith('/usr'):
