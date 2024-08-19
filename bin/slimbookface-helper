@@ -4,7 +4,45 @@
 import os
 import sys
 import subprocess
+import re
 
+def update_config(section,key,value):
+    file = open("/etc/howdy/config.ini","r")
+    lines = file.readlines()
+    file.close()
+    
+    output = []
+    section_match = "[{0}]".format(section)
+    in_section = False
+    
+    for line in lines:
+        out = line
+        line = line.strip()
+        
+        m = re.search("\\[[a-zA-Z]+\\]",line)
+        if (m):
+            print("section ",m.group(0))
+            if (m.group(0) == section_match):
+                in_section = True
+            else:
+                in_section = False
+        
+        if (in_section):
+            tmp = line.split("=")
+            
+            if (len(tmp) > 1):
+                mkey = tmp[0].strip()
+                if (mkey == key):
+                    out = "{0} = {1}\n".format(key,value)
+        
+        output.append(out)
+    
+    file = open("/etc/howdy/config.ini","wt")
+    
+    for o in output:
+        file.write(o)
+    file.close()
+    
 def main():
     action = ""
     
@@ -27,6 +65,23 @@ def main():
         pass
     elif (action == "test"):
         os.system("howdy test")
+    elif (action == "update-config"):
+        if (len(sys.argv)>2):
+            cfg = sys.argv[2]
+            tmp = cfg.split("=")
+            
+            if (len(tmp)>1):
+                key = tmp[0]
+                value = tmp[1]
+                
+                tmp = key.split(".")
+                
+                if (len(tmp)>1):
+                    section = tmp[0]
+                    key = tmp[1]
+                    
+                    update_config(section,key,value)
+                
     else:
         pass
     sys.exit(0)
