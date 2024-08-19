@@ -291,13 +291,12 @@ class SlimbookFace(Gtk.Window):
         rb_box.set_name("radios")
 
         try:
-            config_file = '/lib/security/howdy/config.ini'
-            call = subprocess.getstatusoutput("cat "+config_file)[1]
-            patron = "certainty.*=[ ](.*)"
-            patron_res = re.compile(patron)
-            value = patron_res.search(call).group(1)
-            #print(value)
-
+            config = self.get_config()
+            value = config["video"]["certainty"]
+            print(value)
+            
+            #TODO: convert to float and make a better heuristic
+            
             if value == "4.2":
                 rb_fast.set_active(True)
             elif value == "2.8":
@@ -567,17 +566,8 @@ class SlimbookFace(Gtk.Window):
             else:
                 print("Mode not found")
 
-            if not cert == "":
-                if self.update_config_file("certainty", str(cert)) == 0:
-                    print("Updated to "+radiobutton.get_name())
-
-            config_file = '/etc/howdy/config.ini'
-            call = subprocess.getstatusoutput("cat "+config_file)[1]
-            patron = "certainty.*=[ ](.*)"
-            patron_res = re.compile(patron)
-            value = patron_res.search(call).group(1)
-            print("Actual value: "+value+"\n")
-
+            os.system("pkexec slimbookface-helper update-config video.certainty={0}".format(cert))
+            
     def button_change(self, eventbox, icon, label):
         
         box = eventbox.get_property("name")
