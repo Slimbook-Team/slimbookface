@@ -28,6 +28,7 @@ models_path = '/usr/share/dlib/'+ user +'.dat'
 _ = gettext.gettext
 
 HOWDY_CONFIG = "/etc/howdy/config.ini"
+V4L_PATH = "/dev/v4l/by-path/"
 
 class SlimbookFace(Gtk.Window):
 
@@ -489,7 +490,7 @@ class SlimbookFace(Gtk.Window):
             return configparser.ConfigParser()
         
     def get_device_list(self):
-        devices = os.listdir("/dev/v4l/by-id")
+        devices = os.listdir(V4L_PATH)
         #print(salida[1])
 
         listStoreDevices = Gtk.ListStore(str, str)
@@ -501,9 +502,9 @@ class SlimbookFace(Gtk.Window):
             #print(i)
             #print (dev)
             device = (cont, str(dev))
-            #if dev[-1:] == "0":
-            listStoreDevices.append((str(cont), str(dev)))
-            cont = cont+1
+            if dev[-1:] == "0":
+                listStoreDevices.append((str(cont), str(dev)))
+                cont = cont+1
 
         # TreView que almacena el listado de los dispositivos disponibles del usuario
         # Adding column text
@@ -515,6 +516,18 @@ class SlimbookFace(Gtk.Window):
         self.devices = ""
         self.devices = Gtk.VBox(spacing=5)
         self.devices.pack_start(self.devicesTreeView, False, False, 1)
+        
+        try:
+            config = self.get_config()
+            
+            cfg_device = config["video"]["device_path"]
+            for dev in listStoreDevices:
+                
+                #TODO: fix this
+                if (cfg_device.find(dev[1])):
+                    self.devicesTreeView.set_cursor(dev.path)
+        except:
+            pass
 
     def get_face_list(self):
         try:
@@ -682,6 +695,9 @@ class SlimbookFace(Gtk.Window):
         device = model.get_value(tree_iter, 1)
         
         print(device)
+        
+        os.system("pkexec slimbookface-helper update-config video.device_path={0}{1}".format(V4L_PATH,device))
+        
     
 class AddFaceDialog(Gtk.Dialog):
 
