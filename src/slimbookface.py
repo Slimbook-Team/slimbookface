@@ -255,7 +255,7 @@ class SlimbookFace(Gtk.Window):
         scrolled_window2.add(self.devices)
 
         self.tree_selection2 = self.devicesTreeView.get_selection()
-        #self.tree_selection2.connect("changed", self.onDeviceSelectionChanged, self.buttonDeleteFace)
+        self.tree_selection2.connect("changed", self.on_device_changed, None)
 
         lbl_devices = Gtk.Label()
         lbl_devices.set_markup("<span><b>"+_("Devices")+"</b></span>")
@@ -293,20 +293,17 @@ class SlimbookFace(Gtk.Window):
         try:
             config = self.get_config()
             value = config["video"]["certainty"]
-            print(value)
             
-            #TODO: convert to float and make a better heuristic
+            value = float(value) # check for locale decimal point?
             
-            if value == "4.2":
+            if value >= 4.2:
                 rb_fast.set_active(True)
-            elif value == "2.8":
+            elif value > 2.0 and value < 4.2:
                 rb_balanced.set_active(True)
-            elif value == "2":
+            elif value <= 2.0:
                 rb_secure.set_active(True)
-            else: 
-                print("Can't find certainty level")
         except:
-            print("Config file not found")  
+            print("Failed to read config.ini")  
 
         rb_fast.connect("toggled", self.on_radio_button_toggled)
         rb_balanced.connect("toggled", self.on_radio_button_toggled)
@@ -492,7 +489,7 @@ class SlimbookFace(Gtk.Window):
             return configparser.ConfigParser()
         
     def get_device_list(self):
-        devices = os.listdir("/dev/v4l/by-path")
+        devices = os.listdir("/dev/v4l/by-id")
         #print(salida[1])
 
         listStoreDevices = Gtk.ListStore(str, str)
@@ -504,9 +501,9 @@ class SlimbookFace(Gtk.Window):
             #print(i)
             #print (dev)
             device = (cont, str(dev))
-            if dev[-1:] == "0":
-                listStoreDevices.append((str(cont), str(dev)))
-                cont = cont+1
+            #if dev[-1:] == "0":
+            listStoreDevices.append((str(cont), str(dev)))
+            cont = cont+1
 
         # TreView que almacena el listado de los dispositivos disponibles del usuario
         # Adding column text
@@ -677,6 +674,14 @@ class SlimbookFace(Gtk.Window):
         
         dialog.destroy()
     
+    def on_device_changed(self, tree_selection, data):
+        (model, path) = tree_selection.get_selected_rows()
+
+        tree_iter = model.get_iter(path)
+        camid = model.get_value(tree_iter, 0)
+        device = model.get_value(tree_iter, 1)
+        
+        print(device)
     
 class AddFaceDialog(Gtk.Dialog):
 
