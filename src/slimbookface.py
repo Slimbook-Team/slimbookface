@@ -761,7 +761,7 @@ class AddFaceDialog(Gtk.Dialog):
         
     def close_ok(self):
         face_name = self.entryFaceModelName.get_text()
-        print(face_name)
+        os.system("pkexec slimbookface-helper add {0}".format(face_name))
         
 if __name__ == "__main__":
     if __file__.startswith('/usr') or os.getcwd().startswith('/usr'):
