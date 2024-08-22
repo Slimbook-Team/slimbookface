@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+import cv2
+import numpy
 import gi
 import os
 import sys
@@ -19,7 +21,8 @@ sys.path.insert(1, str('../src'))
 
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gdk', '3.0')
-from gi.repository import Gdk, Gtk, GdkPixbuf
+from gi.repository import Gdk, Gtk, GdkPixbuf, GObject
+import cairo
 
 currpath = os.path.dirname(os.path.realpath(__file__))
 user = getpass.getuser()
@@ -757,12 +760,57 @@ class AddFaceDialog(Gtk.Dialog):
         self.show_all()
 
     def show_cam(self, buttonShowCam):
-        print("show")
+        webcam_dialog = WebcamDialog()
+        webcam_dialog.set_modal(True)
+        response = webcam_dialog.run()
         
     def close_ok(self):
         face_name = self.entryFaceModelName.get_text()
         os.system("pkexec slimbookface-helper add {0}".format(face_name))
+
+class WebcamDialog(Gtk.Dialog):
+
+    def __init__(self):
+        Gtk.Dialog.__init__(self,
+            (_('Preview')),
+            parent=None,
+            modal=True,
+            destroy_with_parent=True)
         
+        self.add_buttons(Gtk.STOCK_OK, Gtk.ResponseType.CLOSE)
+        self.set_position(Gtk.WindowPosition.CENTER)
+        self.set_default_size(400, 400)
+        box = Gtk.VBox()
+        self.da = Gtk.DrawingArea()
+        self.da.set_size_request(200,200)
+        box.pack_start(self.da, True, True,0)
+        self.da.connect("draw",self.expose)
+        self.get_content_area().add(box)
+        
+        self.show_all()
+        
+        GObject.timeout_add(500,self.update)
+        
+        self.vid = cv2.VideoCapture(0)
+
+    def update(self):
+        self.da.queue_draw()
+        return True
+    
+    def expose(self,area,context):
+        #context.scale(area.get_allocated_width(), area.get_allocated_height())
+        ret, frame = self.vid.read()
+        if ret:
+            print(frame.shape)
+            B,G,R = cv2.split(frame)
+            data = cv2.merge([B,G,R])
+            #data = numpy.ndarray(frame.shape, dtype=numpy.uint32)
+            #numpy.copyto(data,frame,"unsafe")
+            surface = cairo.ImageSurface.create_for_data (data,cairo.FORMAT_RGB24 , frame.shape[1], frame.shape[0])
+            context.set_source_surface(surface)
+            context.paint()
+
+
 if __name__ == "__main__":
     if __file__.startswith('/usr') or os.getcwd().startswith('/usr'):
         sys.path.insert(1, '/usr/share/slimbookface')
