@@ -526,8 +526,7 @@ class SlimbookFace(Gtk.Window):
             cfg_device = config["video"]["device_path"]
             for dev in listStoreDevices:
                 
-                #TODO: fix this
-                if (cfg_device.find(dev[1])):
+                if (cfg_device.find(dev[1]) != -1):
                     self.devicesTreeView.set_cursor(dev.path)
         except:
             pass
@@ -633,14 +632,20 @@ class SlimbookFace(Gtk.Window):
         icon_face.set_name("clicked") 
         self.button_change(EventBox, icon_face, label_face)
         
-        addFace_dialog = AddFaceDialog()
-        addFace_dialog.set_modal(True)
-        response = addFace_dialog.run()
+        try:
+            config = self.get_config()
+            
+            cfg_device = config["video"]["device_path"]
+            addFace_dialog = AddFaceDialog(cfg_device)
+            addFace_dialog.set_modal(True)
+            response = addFace_dialog.run()
         
-        if response == Gtk.ResponseType.ACCEPT:
-            addFace_dialog.close_ok()
+            if response == Gtk.ResponseType.ACCEPT:
+                addFace_dialog.close_ok()
+            addFace_dialog.destroy()
+        except:
+            print("Cannot read config.ini")
         
-        addFace_dialog.destroy()
         icon_face.set_name("released") 
         self.button_change(EventBox, icon_face, label_face)
 
@@ -704,12 +709,13 @@ class SlimbookFace(Gtk.Window):
     
 class AddFaceDialog(Gtk.Dialog):
 
-    def __init__(self):
+    def __init__(self, device):
         Gtk.Dialog.__init__(self,
             (_('Slimbook Face: Add new face model for current user')),
             parent=None,
             modal=True,
             destroy_with_parent=True)
+        self.device = device
         self.add_buttons(Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT)
         self.add_buttons(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
         self.set_position(Gtk.WindowPosition.CENTER)
@@ -744,7 +750,7 @@ class AddFaceDialog(Gtk.Dialog):
         label.set_halign(Gtk.Align.START)
         table.attach(label, 0, 2, 3, 4, xpadding=5, ypadding=5)
         # (4, 0)
-        self.buttonShowCam = Gtk.Button(label=(_('Show webcam (4 seconds)')))
+        self.buttonShowCam = Gtk.Button(label=(_('Show webcam')))
         self.buttonShowCam.connect("clicked", self.show_cam)
         table.attach(self.buttonShowCam, 0, 2, 4, 5,
             xpadding=5,
@@ -760,7 +766,7 @@ class AddFaceDialog(Gtk.Dialog):
         self.show_all()
 
     def show_cam(self, buttonShowCam):
-        webcam_dialog = WebcamDialog()
+        webcam_dialog = WebcamDialog(self.device)
         webcam_dialog.set_modal(True)
         response = webcam_dialog.run()
         
@@ -770,29 +776,34 @@ class AddFaceDialog(Gtk.Dialog):
 
 class WebcamDialog(Gtk.Dialog):
 
-    def __init__(self):
+    def __init__(self,device):
         Gtk.Dialog.__init__(self,
             (_('Preview')),
             parent=None,
             modal=True,
             destroy_with_parent=True)
         
-        self.add_buttons(Gtk.STOCK_OK, Gtk.ResponseType.CLOSE)
+        self.device = device
+        #self.add_buttons(Gtk.STOCK_OK, Gtk.ResponseType.CLOSE)
         self.set_position(Gtk.WindowPosition.CENTER)
-        self.set_default_size(400, 400)
+        self.set_default_size(648, 488)
         box = Gtk.VBox()
         self.da = Gtk.DrawingArea()
-        self.da.set_size_request(200,200)
+        self.da.set_size_request(320,240)
         box.pack_start(self.da, True, True,0)
         self.da.connect("draw",self.expose)
         self.get_content_area().add(box)
         
+        self.connect("destroy",self.on_destroy)
         self.show_all()
         
-        GObject.timeout_add(500,self.update)
+        GObject.timeout_add(60,self.update)
         
-        self.vid = cv2.VideoCapture(0)
+        self.vid = cv2.VideoCapture(device)
 
+    def on_destroy(self,data):
+        self.vid.release()
+        
     def update(self):
         self.da.queue_draw()
         return True
@@ -801,12 +812,17 @@ class WebcamDialog(Gtk.Dialog):
         #context.scale(area.get_allocated_width(), area.get_allocated_height())
         ret, frame = self.vid.read()
         if ret:
-            print(frame.shape)
-            B,G,R = cv2.split(frame)
-            data = cv2.merge([B,G,R])
+            #print(frame.shape)
+            h,w,bpp = frame.shape
+            self.da.set_size_request(w,h)
+            #frame = numpy.expand_dims(frame,axis=-1)
+            frame = cv2.cvtColor(frame, cv2.COLOR_RGB2RGBA)
+            data = bytearray(frame.tobytes())
+            
+            #print(len(data))
             #data = numpy.ndarray(frame.shape, dtype=numpy.uint32)
-            #numpy.copyto(data,frame,"unsafe")
-            surface = cairo.ImageSurface.create_for_data (data,cairo.FORMAT_RGB24 , frame.shape[1], frame.shape[0])
+            #numpy.copyto(data,raw,"unsafe")
+            surface = cairo.ImageSurface.create_for_data (data,cairo.FORMAT_ARGB32 ,w,h)
             context.set_source_surface(surface)
             context.paint()
 
