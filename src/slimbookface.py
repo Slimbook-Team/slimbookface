@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+import v4l2
+
 import cv2
 import numpy
 import gi
@@ -14,6 +16,7 @@ import getpass
 import re
 import time
 import configparser
+import glob
 from datetime import datetime
 from os.path import expanduser
 
@@ -493,21 +496,27 @@ class SlimbookFace(Gtk.Window):
             return configparser.ConfigParser()
         
     def get_device_list(self):
-        devices = os.listdir(V4L_PATH)
-        #print(salida[1])
-
-        listStoreDevices = Gtk.ListStore(str, str)
+    
+        listStoreDevices = Gtk.ListStore(str, str, str)
         self.devicesTreeView = Gtk.TreeView(model=listStoreDevices)
         
+        devices = glob.glob("/dev/video*")
         cont = 0
-        for device in devices:
-            dev = device
-            #print(i)
-            #print (dev)
-            device = (cont, str(dev))
-            if dev[-1:] == "0":
-                listStoreDevices.append((str(cont), str(dev)))
-                cont = cont+1
+        for dev in devices:
+            info = v4l2.query_capabilities(dev)
+            if ((info.device_caps & v4l2.CAP_VIDEO_CAPTURE) != 0 ):
+                name = info.card
+                node = dev
+                for lnk in os.listdir(V4L_PATH):
+                    target = os.path.realpath(V4L_PATH + os.readlink(V4L_PATH + lnk))
+
+                    if (target == dev):
+                        node = lnk
+                        break
+                
+                listStoreDevices.append((str(cont), name, node))
+                cont = cont + 1
+        
 
         # TreView que almacena el listado de los dispositivos disponibles del usuario
         # Adding column text
@@ -526,7 +535,7 @@ class SlimbookFace(Gtk.Window):
             cfg_device = config["video"]["device_path"]
             for dev in listStoreDevices:
                 
-                if (cfg_device.find(dev[1]) != -1):
+                if (cfg_device.find(dev[2]) != -1):
                     self.devicesTreeView.set_cursor(dev.path)
         except:
             pass
