@@ -116,7 +116,6 @@ class SlimbookFace(Gtk.Window):
         if os.system("which howdy")==0:
             lbl_download.set_name("clicked")
             iconDownload.set_name("clicked")
-            
         else:
             lbl_download.set_name("released") 
             iconDownload.set_name("released") 
@@ -169,7 +168,6 @@ class SlimbookFace(Gtk.Window):
         evnt_login.add(iconLogin)
         #evnt_login.connect("button_press_event", self._btnLogin_clicked, iconLogin, lbl_login )      
 
-
         # Loading state
         if os.path.isfile(HOWDY_CONFIG):
 
@@ -184,21 +182,6 @@ class SlimbookFace(Gtk.Window):
                     if line[0] != '#':
                         iconLogin.set_name("clicked")
                     
-              #TODO: check kde
-        """
-            if subprocess.getstatusoutput('cat /etc/pam.d/common-auth | grep howdy | grep "#"')[0] == 0:
-                iconLogin.set_name("released")
-                
-            else:
-                desktop_env = subprocess.getoutput("echo $XDG_CURRENT_DESKTOP")
-                print(desktop_env)
-
-                if not desktop_env.lower().find('kde') == -1:
-                    iconLogin.set_name("released")
-                else:
-                    iconLogin.set_name("clicked")
-                
-        """
 
         self.button_change(evnt_login, iconLogin, lbl_login)
         
@@ -242,7 +225,6 @@ class SlimbookFace(Gtk.Window):
         scrolled_window1.set_min_content_width(300)
         scrolled_window1.add(self.faces)
         
-
         self.buttonDeleteFace = Gtk.Button(label=(_('Delete selected face')))
         #self.buttonDeleteFace.set_sensitive(False)
         self.buttonDeleteFace.set_name("detele_face")
@@ -267,7 +249,7 @@ class SlimbookFace(Gtk.Window):
         lbl_devices = Gtk.Label()
         lbl_devices.set_markup("<span><b>"+_("Devices")+"</b></span>")
 
-    # Radiobuttons
+        # Radiobuttons
 
         rb_box = Gtk.Box()
         
@@ -534,7 +516,7 @@ class SlimbookFace(Gtk.Window):
             
             cfg_device = config["video"]["device_path"]
             for dev in listStoreDevices:
-                
+                print("* ",dev[2])
                 if (cfg_device.find(dev[2]) != -1):
                     self.devicesTreeView.set_cursor(dev.path)
         except:
@@ -599,10 +581,10 @@ class SlimbookFace(Gtk.Window):
         if box == "howdy_download":
             if state == "clicked":
                 img = '/images/img01-white.png'
-                label.set_label(_("Reinstall webcam software (Howdy)"))
+                label.set_label(_("Howdy is installed"))
             else:
                 img = '/images/img01.png'
-                label.set_label(_("Install webcam software (Howdy)"))
+                label.set_label(_("Howdy is not installed"))
 
         elif box == "howdy_activate":
             if state == "clicked":
@@ -616,10 +598,10 @@ class SlimbookFace(Gtk.Window):
             
             if state == "clicked":
                 img = '/images/img03-white.png'
-                label.set_label(_("Disable face recognition in login"))
+                label.set_label(_("Howdy is enabled at login"))
             else:
                 img = '/images/img03.png'
-                label.set_label(_("Enable face recognition in login"))
+                label.set_label(_("Howdy is disabled at login"))
 
         elif box == "howdy_addface":
             if state == "clicked":

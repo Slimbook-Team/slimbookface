@@ -55,7 +55,7 @@ def main():
         os.system("howdy disable 1")
     elif (action == "add"):
         if (len(sys.argv)>2):
-            os.system("howdy add {0}".format(sys.argv[2]))
+            os.system("howdy add {0} -y".format(sys.argv[2]))
     elif (action == "remove"):
         if (len(sys.argv)>2):
             os.system("howdy remove {0} -y".format(sys.argv[2]))
