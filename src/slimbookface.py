@@ -75,16 +75,16 @@ class SlimbookFace(Gtk.Window):
 
         self.add(window_grid)
 
-        # Load face models from encoded JSON
-        
-        try:
-            encodings = json.load(open(models_path))
-        except FileNotFoundError:
-            print("No face model known for the user " + user)
-            encodings = ""
-            
-        self.facesTreeView = self.get_face_list()
+       
+        self.facesTreeView = Gtk.TreeView()
+        for i, column_title in enumerate(["ID", (_("Face name")), (_("Creation date"))]):
+            rendererText = Gtk.CellRendererText()
+            column_text = Gtk.TreeViewColumn(column_title, rendererText, text=i)
+            self.facesTreeView.append_column(column_text)
 
+        self.facesTreeView.set_model(self.get_face_list())
+        
+        
         # Creating page grids
         grid_main = Gtk.Grid(column_homogeneous=True,
                               column_spacing=15,
@@ -166,6 +166,7 @@ class SlimbookFace(Gtk.Window):
         evnt_login = Gtk.EventBox()
         evnt_login.set_property("name" ,"howdy_login")
         evnt_login.add(iconLogin)
+        evnt_login.set_sensitive(False)
         #evnt_login.connect("button_press_event", self._btnLogin_clicked, iconLogin, lbl_login )      
 
         # Loading state
@@ -212,12 +213,8 @@ class SlimbookFace(Gtk.Window):
 
         # Scroll window 1
 
-        self.faces = ""
-        if encodings == "":
-            self.faces = Gtk.Label(label=_('0 faces added'))
-        else:
-            self.faces = Gtk.VBox(spacing=5)
-            self.faces.add(self.facesTreeView)
+        self.faces = Gtk.VBox(spacing=5)
+        self.faces.add(self.facesTreeView)
 
         scrolled_window1 = Gtk.ScrolledWindow()
         scrolled_window1.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
@@ -515,8 +512,8 @@ class SlimbookFace(Gtk.Window):
             config = self.get_config()
             
             cfg_device = config["video"]["device_path"]
+            
             for dev in listStoreDevices:
-                print("* ",dev[2])
                 if (cfg_device.find(dev[2]) != -1):
                     self.devicesTreeView.set_cursor(dev.path)
         except:
@@ -529,31 +526,21 @@ class SlimbookFace(Gtk.Window):
             print("No face model known for the user " + user)
             encodings = ""
 
-        listStoreFaces = Gtk.ListStore(int, str, str)
-        facesTreeView = Gtk.TreeView(model=listStoreFaces)
+        model = Gtk.ListStore(int, str, str)
 
         if encodings == "":
             print("0 faces added")
         else:
-            listStoreFaces = Gtk.ListStore(int, str, str)
             for enc in encodings:
                 strface = enc["label"]
                 date = time.strftime('%d-%m-%Y %H:%M:%S', time.localtime(enc["time"]))
                 idface = enc["id"]
 
                 face = (int(idface), str(strface), str(date))
-                listStoreFaces.append(face)
+                model.append(face)
             
-            #TreView whit added face models
-            
-            facesTreeView = Gtk.TreeView(model=listStoreFaces)
-
-            for i, column_title in enumerate(["ID", (_("Face name")), (_("Creation date"))]):
-                rendererText = Gtk.CellRendererText()
-                column_text = Gtk.TreeViewColumn(column_title, rendererText, text=i)
-                facesTreeView.append_column(column_text)
         
-        return facesTreeView
+        return model
 
     def on_radio_button_toggled(self, radiobutton):
         
@@ -633,6 +620,9 @@ class SlimbookFace(Gtk.Window):
         
             if response == Gtk.ResponseType.ACCEPT:
                 addFace_dialog.close_ok()
+                #reload face list
+                self.facesTreeView.set_model(self.get_face_list())
+                
             addFace_dialog.destroy()
         except:
             print("Cannot read config.ini")
@@ -691,9 +681,7 @@ class SlimbookFace(Gtk.Window):
 
         tree_iter = model.get_iter(path)
         camid = model.get_value(tree_iter, 0)
-        device = model.get_value(tree_iter, 1)
-        
-        print(device)
+        device = model.get_value(tree_iter, 2)
         
         os.system("pkexec slimbookface-helper update-config video.device_path={0}{1}".format(V4L_PATH,device))
         
