@@ -1,0 +1,64 @@
+
+slimbookface (1.4.6) focal; urgency=medium
+
+  * Solving a Linux Mint problem
+  * On KDE installing howdy, avoids spt update
+
+ -- slimbook <sat@slimbook.es>  Wed, 7 Jul 2021 13:08:02 +0200
+
+slimbookface (1.4.5) focal; urgency=medium
+
+  * Solving a Linux Mint problem
+  * On KDE installing howdy, avoids spt update
+
+ -- slimbook <sat@slimbook.es>  Thu, 24 Jun 2021 13:08:02 +0200
+
+slimbookface (1.4.4) focal; urgency=medium
+
+  * Solving a KDE howdy install problem
+  * Loading buttons updated
+
+ -- slimbook <sat@slimbook.es>  Thu, 24 Jun 2021 13:08:02 +0200
+
+slimbookface (1.4.3) focal; urgency=medium
+
+  * Readjust release
+
+ -- slimbook <sat@slimbook.es>  Thu, 24 Jun 2021 13:08:02 +0200
+slimbookface (1.4.2beta) focal; urgency=medium
+
+  * Added new functions (select device & recognition level)!
+
+ -- slimbook <sat@slimbook.es>  Thu, 17 Jun 2021 13:08:02 +0200
+
+slimbookface (1.4.1beta) focal; urgency=medium
+
+  * Added new functions (select device & recognition level)!
+
+ -- slimbook <sat@slimbook.es>  Mon, 31 May 2021 13:08:02 +0200
+
+slimbookface (1.3beta) focal; urgency=medium
+
+  * Fix install driver!
+
+ -- slimbook <sat@slimbook.es>  Wed, 25 Aug 2020 18:08:02 +0200
+
+slimbookface (1.2beta) bionic; urgency=medium
+
+  * You can disable or enable face recognition in login screen!
+
+ -- slimbook <sat@slimbook.es>  Wed, 30 Sep 2019 18:08:02 +0200
+
+slimbookface (1.1beta) bionic; urgency=medium
+
+  * You can delete and control the faces added!
+  * Some bugs solved!
+
+ -- slimbook <sat@slimbook.es>  Wed, 02 Aug 2019 15:05:02 +0200
+
+slimbookface (1.0beta) bionic; urgency=medium
+
+  * Slimbook Face has been released!
+  * Facial and biometric recognition and forget passwords!
+
+ -- slimbook <sat@slimbook.es>  Fri, 10 May 2019 13:16:02 +0200

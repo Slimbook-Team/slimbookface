@@ -1,0 +1,3 @@
+bin/* /usr/bin/
+policykit/* /usr/share/polkit-1/actions/
+src/* /usr/share/slimbookface/
