@@ -646,7 +646,7 @@ class SlimbookFace(Gtk.Window):
             self.button_change(EventBox, icon_activate, label_activate)    
 
     def on_button_delete_face_clicked(self, button, tree_selection, treeview) :
-        print("delete face")
+        
         (model, pathlist) = tree_selection.get_selected_rows()
         for path in pathlist :
             tree_iter = model.get_iter(path)
