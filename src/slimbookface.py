@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+import utils
 import v4l2
 
 import cv2
@@ -512,8 +513,9 @@ class SlimbookFace(Gtk.Window):
             config = self.get_config()
             
             cfg_device = config["video"]["device_path"]
-            
+            #print(cfg_device)
             for dev in listStoreDevices:
+                #print("-",dev[2])
                 if (cfg_device.find(dev[2]) != -1):
                     self.devicesTreeView.set_cursor(dev.path)
         except:
@@ -807,12 +809,16 @@ class WebcamDialog(Gtk.Dialog):
 
 
 if __name__ == "__main__":
+
     if __file__.startswith('/usr') or os.getcwd().startswith('/usr'):
         sys.path.insert(1, '/usr/share/slimbookface')
     else:
         sys.path.insert(1, os.path.normpath(
             os.path.join(os.getcwd(), '../src')))
 
+    pid_name = "slimbook.face.application.pid"
+    utils.application_lock(pid_name)
+    
     style_provider = Gtk.CssProvider()
     style_provider.load_from_path(currpath+'/css/style.css')
 
@@ -824,3 +830,7 @@ if __name__ == "__main__":
     win.connect("destroy", Gtk.main_quit)
     win.show_all()
     Gtk.main()
+    
+    utils.application_release(pid_name)
+    
+    sys.exit(0)
