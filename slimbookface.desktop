@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Slimbook Face
+Exec=/usr/bin/slimbookface
+Comment=Authenticate without using password, just using your face!
+Icon=slimbookface
+Type=Application
+Terminal=false
+StartupNotify=true
+Encoding=UTF-8
+Categories=Utility;
+Name=Slimbook Face
