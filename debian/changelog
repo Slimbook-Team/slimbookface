@@ -1,3 +1,9 @@
+slimbookface (1.5.0~beta2) noble; urgency=medium
+
+  * Fixed exec path
+
+ -- Slimbook <dev@slimbook.es>  Fri, 30 Aug 2024 22:04:10 +0200
+
 slimbookface (1.5.0~beta1) noble; urgency=medium
 
   * Big code refactor.
