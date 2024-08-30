@@ -12,15 +12,12 @@ Depends: ${misc:Depends}, ${python:Depends},
 	python3,
 	python3-gi,
 	python3-gi-cairo,
-	python3-pil,
-	python3-dbus,
 	gir1.2-gtk-3.0,
 	gir1.2-gdkpixbuf-2.0,
 	gir1.2-glib-2.0,
 	libgirepository-1.0-1,
-	gir1.2-notify-0.7,
-	libnotify-bin,
-	xdotool
+	python3-opencv,
+	howdy, dlib-data
 Description: Slimbook Face
  Facial and biometric recognition allows you not to introduce the password
  

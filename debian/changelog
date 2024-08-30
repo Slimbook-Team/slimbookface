@@ -1,3 +1,8 @@
+slimbookface (1.5.0~beta0) noble; urgency=medium
+
+  * Big code refactor.
+
+ -- Slimbook <dev@slimbook.es>  Fri, 30 Aug 2024 11:15:08 +0200
 
 slimbookface (1.4.6) focal; urgency=medium
 
@@ -25,6 +30,7 @@ slimbookface (1.4.3) focal; urgency=medium
   * Readjust release
 
  -- slimbook <sat@slimbook.es>  Thu, 24 Jun 2021 13:08:02 +0200
+
 slimbookface (1.4.2beta) focal; urgency=medium
 
   * Added new functions (select device & recognition level)!

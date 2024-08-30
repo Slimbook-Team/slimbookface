@@ -1,3 +1,5 @@
 bin/* /usr/bin/
 policykit/* /usr/share/polkit-1/actions/
 src/* /usr/share/slimbookface/
+slimbookface.desktop /usr/share/applications/
+slimbookface.png /usr/share/pixmaps/

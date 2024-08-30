@@ -8,6 +8,6 @@
 %:
 	dh $@
 
-
-
-
+override_dh_fixperms:
+	dh_fixperms
+	chmod 4755 debian/slimbookface/usr/bin/slimbookface-helper
