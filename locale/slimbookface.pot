@@ -1,0 +1,213 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2024-09-05 17:21+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: slimbookface.py:81
+msgid "Creation date"
+msgstr ""
+
+#: slimbookface.py:81
+msgid "Face name"
+msgstr ""
+
+#: slimbookface.py:97
+msgid "Main"
+msgstr ""
+
+#: slimbookface.py:98
+msgid "Information"
+msgstr ""
+
+#: slimbookface.py:211
+msgid "Faces"
+msgstr ""
+
+#: slimbookface.py:226
+msgid "Delete selected face"
+msgstr ""
+
+#: slimbookface.py:248
+msgid "Devices"
+msgstr ""
+
+#: slimbookface.py:256
+msgid "Recognition level"
+msgstr ""
+
+#: slimbookface.py:260
+msgid "Fast"
+msgstr ""
+
+#: slimbookface.py:266
+msgid "Balanced"
+msgstr ""
+
+#: slimbookface.py:272
+msgid "Secure"
+msgstr ""
+
+#: slimbookface.py:337
+msgid "Visit SLIMBOOK website"
+msgstr ""
+
+#: slimbookface.py:342
+msgid "User manual of Slimbook Face"
+msgstr ""
+
+#: slimbookface.py:346
+msgid "GitHub"
+msgstr ""
+
+#: slimbookface.py:350
+msgid "Help us with translations"
+msgstr ""
+
+#: slimbookface.py:362
+msgid "strlabelusermanual"
+msgstr ""
+
+#: slimbookface.py:362
+msgid "strusermanual"
+msgstr ""
+
+#: slimbookface.py:366
+msgid "If you want to support the Slimbook team with the development of this app and several more to come, you can do so by joining our"
+msgstr ""
+
+#: slimbookface.py:366
+msgid "or buying a brand new Slimbook."
+msgstr ""
+
+#: slimbookface.py:371
+msgid "Thanks to boltgolt. The software is provided \"as is\", without"
+msgstr ""
+
+#: slimbookface.py:371
+msgid "warranty of any kind."
+msgstr ""
+
+#: slimbookface.py:375
+msgid "Info:"
+msgstr ""
+
+#: slimbookface.py:375 slimbookface.py:382
+msgid "Contact with us if you find something wrong."
+msgstr ""
+
+#: slimbookface.py:389
+msgid "Copy e-mail"
+msgstr ""
+
+#: slimbookface.py:399
+msgid "--copy and redistribute the material in any medium"
+msgstr ""
+
+#: slimbookface.py:399
+msgid "Share:"
+msgstr ""
+
+#: slimbookface.py:399
+msgid "Slimbook Copyright - License Creative Commons BY-NC-ND 4.0"
+msgstr ""
+
+#: slimbookface.py:399
+msgid "You are free to:"
+msgstr ""
+
+#: slimbookface.py:399
+msgid "or format"
+msgstr ""
+
+#: slimbookface.py:573
+msgid "Howdy is installed"
+msgstr ""
+
+#: slimbookface.py:576
+msgid "Howdy is not installed"
+msgstr ""
+
+#: slimbookface.py:581 slimbookface.py:646
+msgid "Disable face recognition"
+msgstr ""
+
+#: slimbookface.py:584 slimbookface.py:640
+msgid "Enable face recognition"
+msgstr ""
+
+#: slimbookface.py:590
+msgid "Howdy is enabled at login"
+msgstr ""
+
+#: slimbookface.py:593
+msgid "Howdy is disabled at login"
+msgstr ""
+
+#: slimbookface.py:598 slimbookface.py:601
+msgid "Add new face model"
+msgstr ""
+
+#: slimbookface.py:669
+msgid "Alert!"
+msgstr ""
+
+#: slimbookface.py:671
+msgid "'s face?"
+msgstr ""
+
+#: slimbookface.py:671
+msgid "Are you sure that you want delete"
+msgstr ""
+
+#: slimbookface.py:695
+msgid "Slimbook Face: Add new face model for current user"
+msgstr ""
+
+#: slimbookface.py:712
+msgid "Follow these steps to add new face model to Slimbook Face:"
+msgstr ""
+
+#: slimbookface.py:717
+msgid "Enter a name"
+msgstr ""
+
+#: slimbookface.py:717
+msgid "Step 1:"
+msgstr ""
+
+#: slimbookface.py:730
+msgid "Preview your selected cam image"
+msgstr ""
+
+#: slimbookface.py:730
+msgid "Step 2:"
+msgstr ""
+
+#: slimbookface.py:734
+msgid "Show webcam"
+msgstr ""
+
+#: slimbookface.py:743
+msgid "Accept to capture your face (this can take 5-10 seconds"
+msgstr ""
+
+#: slimbookface.py:743
+msgid "Step 3:"
+msgstr ""
+
+#: slimbookface.py:762
+msgid "Preview"
+msgstr ""
+
