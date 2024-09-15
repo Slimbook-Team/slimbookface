@@ -359,7 +359,7 @@ class SlimbookFace(Gtk.Window):
         link_box2.pack_start(github_link, True, True, 0)
         
         tutorial_link = Gtk.Label()
-        tutorial_link.set_markup("<span><b><a href='"+_('strusermanual')+"'>"+_('strlabelusermanual')+"</a></b>    </span>")
+        tutorial_link.set_markup("<span><b><a href='"+_('https://slimbook.es/en/tutoriales/aplicaciones-slimbook/400-slimbook-face-biometric-recognition-and-dont-enter-more-passwords')+"'>"+_('User manual of Slimbook Face')+"</a></b>    </span>")
         tutorial_link.set_halign(Gtk.Align.CENTER)
 
         social_media = Gtk.Label()
