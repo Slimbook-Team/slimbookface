@@ -1,9 +1,9 @@
 Source: slimbookface
 Section: utils
 Priority: extra
-Maintainer: slimbook <sat@slimbook.es>
-Build-Depends: debhelper (>= 9)
-Standards-Version: 3.9.6
+Maintainer: slimbook <dev@slimbook.es>
+Build-Depends: debhelper-compat (= 13), gettext
+Standards-Version: 4.6.0
 Homepage: http://slimbook.es
 
 Package: slimbookface
