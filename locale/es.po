@@ -1,0 +1,218 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024 Slimbook
+# Slimbook dev <dev@slimbook.es>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: slimbookface 1.5.0\n"
+"POT-Creation-Date: 2024-09-15 09:44+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+#: src/slimbookface.py:81
+msgid "Creation date"
+msgstr "Fecha de creación"
+
+#: src/slimbookface.py:81
+msgid "Face name"
+msgstr "Nombre del rostro"
+
+#: src/slimbookface.py:97
+msgid "Main"
+msgstr "Menú principal"
+
+#: src/slimbookface.py:98
+msgid "Information"
+msgstr "Información"
+
+#: src/slimbookface.py:211
+msgid "Faces"
+msgstr "Rostros"
+
+#: src/slimbookface.py:226
+msgid "Delete selected face"
+msgstr "Eliminar rostro seleccionado"
+
+#: src/slimbookface.py:248
+msgid "Devices"
+msgstr "Dispositivos"
+
+#: src/slimbookface.py:256
+msgid "Recognition level"
+msgstr "Nivel de reconocimiento"
+
+#: src/slimbookface.py:260
+msgid "Fast"
+msgstr "Rápido"
+
+#: src/slimbookface.py:266
+msgid "Balanced"
+msgstr "Intermedio"
+
+#: src/slimbookface.py:272
+msgid "Secure"
+msgstr "Seguro"
+
+#: src/slimbookface.py:337
+msgid "Visit SLIMBOOK website"
+msgstr "Visita la web de SLIMBOOK"
+
+#: src/slimbookface.py:342 src/slimbookface.py:362
+msgid "User manual of Slimbook Face"
+msgstr "Manual de usuario de Slimbook Face"
+
+#: src/slimbookface.py:346
+msgid "GitHub"
+msgstr ""
+
+#: src/slimbookface.py:350
+msgid "Help us with translations"
+msgstr "Ayúdanos con las traducciones"
+
+#: src/slimbookface.py:362
+msgid ""
+"https://slimbook.es/en/tutoriales/aplicaciones-slimbook/400-slimbook-face-"
+"biometric-recognition-and-dont-enter-more-passwords"
+msgstr ""
+
+#: src/slimbookface.py:366
+msgid ""
+"If you want to support the Slimbook team with the development of this app "
+"and several more to come, you can do so by joining our"
+msgstr ""
+"Si la aplicación te ha sido de utilidad, considera decirlo en nuestras redes "
+"sociales.\n"
+"Si quieres apoyar al equipo de Slimbook en el desarrollo de esta y otras "
+"aplicaciones, puedes hacerlo mediante"
+
+#: src/slimbookface.py:366
+msgid "or buying a brand new Slimbook."
+msgstr "o comprando un Slimbook."
+
+#: src/slimbookface.py:371
+msgid "Thanks to boltgolt. The software is provided \"as is\", without"
+msgstr "Gracias a boltgolt. El software se proporciona \"tal cual\", sin"
+
+#: src/slimbookface.py:371
+msgid "warranty of any kind."
+msgstr "garantía de ningún tipo"
+
+#: src/slimbookface.py:375
+msgid "Info:"
+msgstr "Información"
+
+#: src/slimbookface.py:375 src/slimbookface.py:382
+msgid "Contact with us if you find something wrong."
+msgstr "Contacta con nosotros si encuentras algún error."
+
+#: src/slimbookface.py:389
+msgid "Copy e-mail"
+msgstr "Copiar e-mail"
+
+#: src/slimbookface.py:399
+msgid "--copy and redistribute the material in any medium"
+msgstr "--copiar y redistribuir el material en cualquier medio"
+
+#: src/slimbookface.py:399
+msgid "Share:"
+msgstr "Compartir:"
+
+#: src/slimbookface.py:399
+msgid "Slimbook Copyright - License Creative Commons BY-NC-ND 4.0"
+msgstr ""
+
+#: src/slimbookface.py:399
+msgid "You are free to:"
+msgstr "Usted es libre de:"
+
+#: src/slimbookface.py:399
+msgid "or format"
+msgstr "o formato"
+
+#: src/slimbookface.py:573
+msgid "Howdy is installed"
+msgstr "Howdy está instalado"
+
+#: src/slimbookface.py:576
+msgid "Howdy is not installed"
+msgstr "Howdy no está instalado"
+
+#: src/slimbookface.py:581 src/slimbookface.py:646
+msgid "Disable face recognition"
+msgstr "Deshabilitar reconocimiento facial"
+
+#: src/slimbookface.py:584 src/slimbookface.py:640
+msgid "Enable face recognition"
+msgstr "Habilitar reconocimiento facial"
+
+#: src/slimbookface.py:590
+msgid "Howdy is enabled at login"
+msgstr "Login habilitado"
+
+#: src/slimbookface.py:593
+msgid "Howdy is disabled at login"
+msgstr "Login no habilitado"
+
+#: src/slimbookface.py:598 src/slimbookface.py:601
+msgid "Add new face model"
+msgstr "Añadir un nuevo rostro"
+
+#: src/slimbookface.py:669
+msgid "Alert!"
+msgstr "¡Alerta!"
+
+#: src/slimbookface.py:671
+msgid "'s face?"
+msgstr "?"
+
+#: src/slimbookface.py:671
+msgid "Are you sure that you want delete"
+msgstr "¿Estás seguro que deseas eliminar el rostro"
+
+#: src/slimbookface.py:695
+msgid "Slimbook Face: Add new face model for current user"
+msgstr "Slimbook Face: Añadir un nuevo rostro"
+
+#: src/slimbookface.py:712
+msgid "Follow these steps to add new face model to Slimbook Face:"
+msgstr "Sigue los pasos para añadir un nuevo rostro a Slimbook Face:"
+
+#: src/slimbookface.py:717
+msgid "Enter a name"
+msgstr "Introduce un nombre"
+
+#: src/slimbookface.py:717
+msgid "Step 1:"
+msgstr "Paso 1:"
+
+#: src/slimbookface.py:730
+msgid "Preview your selected cam image"
+msgstr "Previsualiza la imagen de la cámara seleccionada"
+
+#: src/slimbookface.py:730
+msgid "Step 2:"
+msgstr "Paso 2:"
+
+#: src/slimbookface.py:734
+msgid "Show webcam"
+msgstr "Mostrar cámara"
+
+#: src/slimbookface.py:743
+msgid "Accept to capture your face (this can take 5-10 seconds"
+msgstr ""
+"Acepta para empezar a capturar tú rostro (esto\n"
+"puede llevar 5-10 segundos"
+
+#: src/slimbookface.py:743
+msgid "Step 3:"
+msgstr "Paso 3:"
+
+#: src/slimbookface.py:762
+msgid "Preview"
+msgstr "Previsualizar"
