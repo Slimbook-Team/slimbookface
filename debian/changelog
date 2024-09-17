@@ -1,3 +1,9 @@
+slimbookface (1.5.0~beta5) noble; urgency=medium
+
+  * Fixing gettext domain not set
+
+ -- Slimbook <dev@slimbook.es>  Tue, 17 Sep 2024 19:21:10 +0200
+
 slimbookface (1.5.0~beta4) noble; urgency=medium
 
   * Added translations
