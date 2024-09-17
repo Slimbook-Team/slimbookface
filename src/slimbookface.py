@@ -33,6 +33,7 @@ user = getpass.getuser()
 models_path = '/usr/share/dlib/'+ user +'.dat'
 
 _ = gettext.gettext
+gettext.textdomain("slimbookface")
 
 HOWDY_CONFIG = "/etc/howdy/config.ini"
 V4L_PATH = "/dev/v4l/by-path/"
