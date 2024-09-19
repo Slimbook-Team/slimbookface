@@ -1,3 +1,11 @@
+slimbookface (1.5.0~beta6) noble; urgency=medium
+
+  * Relaxed polkit rule
+  * Tested on Plasma: it works but kwallet fails to open wifi password
+  * Added missing python3-dlib dependency
+
+ -- Slimbook <dev@slimbook.es>  Thu, 19 Sep 2024 13:28:21 +0200
+
 slimbookface (1.5.0~beta5) noble; urgency=medium
 
   * Fixing gettext domain not set
