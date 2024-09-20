@@ -1,3 +1,9 @@
+slimbookface (1.5.0~beta7) noble; urgency=medium
+
+  * Enabled again login control button
+
+ -- Slimbook <dev@slimbook.es>  Fri, 20 Sep 2024 13:15:27 +0200
+
 slimbookface (1.5.0~beta6) noble; urgency=medium
 
   * Relaxed polkit rule
