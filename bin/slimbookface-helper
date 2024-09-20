@@ -14,6 +14,9 @@ def update_config(section,key,value):
     output = []
     section_match = "[{0}]".format(section)
     in_section = False
+    found = False
+    n = 0
+    section_index = -1
     
     for line in lines:
         out = line
@@ -24,6 +27,7 @@ def update_config(section,key,value):
             
             if (m.group(0) == section_match):
                 in_section = True
+                section_index = n
             else:
                 in_section = False
         
@@ -34,8 +38,14 @@ def update_config(section,key,value):
                 mkey = tmp[0].strip()
                 if (mkey == key):
                     out = "{0} = {1}\n".format(key,value)
+                    found = True
         
         output.append(out)
+        n = n + 1
+    
+    if (found == False and section_index >= 0):
+        out = "{0} = {1}\n".format(key,value)
+        output.insert(section_index + 1,out)
     
     file = open("/etc/howdy/config.ini","wt")
     
@@ -60,9 +70,9 @@ def main():
         if (len(sys.argv)>2):
             os.system("howdy remove {0} -y".format(sys.argv[2]))
     elif (action == "enable-login"):
-        pass
+        os.system("howdy disable-login 0")
     elif (action == "disable-login"):
-        pass
+        os.system("howdy disable-login 1")
     elif (action == "test"):
         os.system("howdy test")
     elif (action == "update-config"):

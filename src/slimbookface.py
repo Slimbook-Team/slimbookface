@@ -168,23 +168,34 @@ class SlimbookFace(Gtk.Window):
         evnt_login = Gtk.EventBox()
         evnt_login.set_property("name" ,"howdy_login")
         evnt_login.add(iconLogin)
-        evnt_login.set_sensitive(False)
-        #evnt_login.connect("button_press_event", self._btnLogin_clicked, iconLogin, lbl_login )      
+        #evnt_login.set_sensitive(False)
+        evnt_login.connect("button_press_event", self.on_button_activate_login_clicked, iconLogin, lbl_login )
 
         # Loading state
-        if os.path.isfile(HOWDY_CONFIG):
-
-            f = open("/etc/pam.d/common-auth","r")
-            lines = f.readlines()
-            f.close()
-            
-            iconLogin.set_name("released")
-            for line in lines:
-                line = line.strip()
-                if line.find("pam_howdy.so") != -1:
-                    if line[0] != '#':
-                        iconLogin.set_name("clicked")
+        iconLogin.set_name("clicked")
+        try:
+            config = self.get_config()
+            value = config["core"]["disabled-login"]
+            if (value == "true"):
+                iconLogin.set_name("released")
+        except:
+            pass
+        
+        f = open("/etc/pam.d/common-auth","r")
+        lines = f.readlines()
+        f.close()
+        
+        #iconLogin.set_name("released")
+        pam_status = False
+        for line in lines:
+            line = line.strip()
+            if line.find("pam_howdy.so") != -1:
+                if line[0] != '#':
+                    pam_status = True
+                    #iconLogin.set_name("clicked")
                     
+        if (pam_status == False):
+            print("Warning: Howdy is not configured at /etc/pam.d/common-auth")
 
         self.button_change(evnt_login, iconLogin, lbl_login)
         
@@ -646,7 +657,32 @@ class SlimbookFace(Gtk.Window):
             os.system("pkexec slimbookface-helper enable")
             label_activate.set_label(_('Disable face recognition'))
             icon_activate.set_name("clicked")
-            self.button_change(EventBox, icon_activate, label_activate)    
+            self.button_change(EventBox, icon_activate, label_activate)
+
+    def on_button_activate_login_clicked(self, EventBox, EventButton, icon_activate, label_activate):
+        
+        state = "false"
+        try:
+            config = self.get_config()
+            state = config["core"]["disabled-login"]
+        except KeyError as e:
+            os.system("pkexec slimbookface-helper update-config core.disabled-login=true")
+            label_activate.set_label(_('Enable at login'))
+            icon_activate.set_name("released")
+            self.button_change(EventBox, icon_activate, label_activate)
+            return
+            
+        if state == "false":
+            os.system("pkexec slimbookface-helper disable-login")
+            label_activate.set_label(_('Enable at login'))
+            icon_activate.set_name("released")
+            self.button_change(EventBox, icon_activate, label_activate)
+        
+        else:
+            os.system("pkexec slimbookface-helper enable-login")
+            label_activate.set_label(_('Disable at login'))
+            icon_activate.set_name("clicked")
+            self.button_change(EventBox, icon_activate, label_activate)
 
     def on_button_delete_face_clicked(self, button, tree_selection, treeview) :
         
