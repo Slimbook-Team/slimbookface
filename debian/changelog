@@ -1,3 +1,9 @@
+slimbookface (1.5.0~beta7.bpo22.04.0) jammy; urgency=medium
+
+  * Backport from noble
+
+ -- Slimbook <dev@slimbook.es>  Wed, 05 Feb 2025 09:51:13 +0100
+
 slimbookface (1.5.0~beta7) noble; urgency=medium
 
   * Enabled again login control button
